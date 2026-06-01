@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  userId   Int    @id @default(autoincrement())
+  username String @unique
+  password String
+  fullName String
+  role     String // PetugasSPPG, SupervisorSPPG
+  position String
+}
+
+model Employee {
+  employeeId   Int    @id @default(autoincrement())
+  employeeName String
+  position     String
+  phone        String
+  address      String
+}
+
+model RawMaterial {
+  materialId     Int             @id @default(autoincrement())
+  materialName   String
+  category       String
+  unit           String
+  stock          Decimal         @db.Decimal(18, 2)
+  estimatedPrice Decimal         @db.Decimal(18, 2)
+  kitchenNeeds   KitchenNeed[]
+  supplierOrders SupplierOrder[]
+}
+
+model School {
+  schoolId               Int                      @id @default(autoincrement())
+  schoolName             String
+  address                String
+  picName                String
+  picPhone               String
+  studentCount           Int
+  productionDistributions ProductionDistribution[]
+}
+
+model KitchenNeed {
+  needId     Int         @id @default(autoincrement())
+  needDate   DateTime    @db.Date
+  materialId Int
+  material   RawMaterial @relation(fields: [materialId], references: [materialId], onDelete: Cascade)
+  quantity   Decimal     @db.Decimal(18, 2)
+  unit       String
+  notes      String?
+}
+
+model SupplierOrder {
+  orderId       Int         @id @default(autoincrement())
+  orderDate     DateTime    @db.Date
+  supplierName  String
+  materialId    Int
+  material      RawMaterial @relation(fields: [materialId], references: [materialId], onDelete: Cascade)
+  orderQuantity Decimal     @db.Decimal(18, 2)
+  unit          String
+  status        String      // Pending, Diproses, Selesai, Dikirim
+  notes         String?
+}
+
+model ProductionDistribution {
+  processId          Int      @id @default(autoincrement())
+  processDate        DateTime @db.Date
+  schoolId           Int
+  school             School   @relation(fields: [schoolId], references: [schoolId], onDelete: Cascade)
+  portionCount       Int
+  productionStatus   String   // Belum Diproses, Diproses, Selesai
+  distributionStatus String   // Belum Dikirim, Dikirim, Selesai
+  notes              String?
+}

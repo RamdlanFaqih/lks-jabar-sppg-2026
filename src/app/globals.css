@@ -8,19 +8,34 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --color-sppg: #b4dfe9;
+  --color-sppg-dark: #9bcad4;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #fafcfd;
+  color: #171717;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
+
+/* Global scale overrides to ensure text is highly legible and not too small */
+.text-\[8px\],
+.text-\[9px\] {
+  font-size: 11px !important;
+}
+
+.text-\[10px\],
+.text-xs {
+  font-size: 13px !important;
+}
+
+.text-sm {
+  font-size: 14.5px !important;
+}
+
+.text-base {
+  font-size: 16.5px !important;
 }

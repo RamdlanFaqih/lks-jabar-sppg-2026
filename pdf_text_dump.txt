@@ -1,0 +1,1315 @@
+
+--- PAGE 1 ---
+ 
+LOMBA KOMPETENSI SISWA (LKS) 
+SEKOLAH MENENGAH KEJURUAN 
+TINGKAT PROVINSI JAWA BARAT 
+TAHUN 2026 
+ 
+ 
+ 
+INFORMASI DAN KISI-KISI 
+ 
+ 
+ 
+Bidang Lomba 
+IT SOFTWARE SOLUTION FOR BUSINESS 
+ 
+ 
+ 
+  
+  
+  
+ 
+    
+  
+   
+    
+ 
+PEMERINTAH DAERAH PROVINSI JAWA BARAT 
+DINAS PENDIDIKAN 
+Jalan Dr. Radjiman No. 6 Telp. (022) 4264813 Fax. (022) 4264881 
+Website : disdik.jabarprov.go.id 
+e-mail: disdik@jabarprov.go.id/sekretariatdisdikjabar@gmail.com 
+BANDUNG - 40171 
+ 
+
+--- PAGE 2 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  ii | Purwakarta, Juni 2026 
+ 
+ 
+LOMBA KOMPETENSI SISWA (LKS) SMK 
+TINGKAT PROVINSI JAWA BARAT 2026 
+ 
+IT Software Solution for Business 
+Smart Meal Distribution System 
+Studi Kasus: Sistem Operasional SPPG 
+ 
+TERM OF REFERENCE (TOR) TEKNIS 
+Panduan Teknis, Studi Kasus, Rubrik & Skenario Uji 
+ 
+Komponen Keterangan 
+Tempat Pelaksanaan SMKN 2 Purwakarta 
+Tanggal Pelaksanaan 10–11 Juni 2026 
+Kategori IT Software Solution for Business 
+Tema Smart Meal Distribution System 
+Sifat Pelaksanaan Mandiri dan Tertutup 
+Durasi Efektif ± 4,5 jam per hari 
+Disusun oleh Dr. Agus Mulyana, MT. dan Tim Juri 
+CATATAN PENTING 
+1. Hari ke-1 TIDAK ada pembuatan Web API. 
+2. Hari ke-1 TIDAK ada integrasi aplikasi desktop ke API. 
+3. Hari ke-2 peserta TIDAK membuat API. 
+4. API hari ke-2 DISEDIAKAN SEPENUHNYA oleh juri. 
+5. Kompleksitas soal disesuaikan untuk peserta SMK (± 4,5 jam efektif per hari). 
+ 
+ 
+--- PAGE 3 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  iii | Purwakarta, Juni 2026 
+ 
+ 
+KATA PENGANTAR 
+Peserta didik Sekolah Menengah Kejuruan (SMK) merupakan asset bangsa 
+yang diharapkan mampu menguasai pengetahuan, pemahaman dan penguasaan 
+keahlian, sehingga lulusan SMK memiliki kemampuan handal berstandar nasional 
+maupun internasional sesuai dengan visi Indonesia tahun 2045 adalah 
+pembangunan manusia dan penguasaan IPTEK (Ilmu Penngetahuan dan Teknologi) 
+dengan peningkatan taraf Pendidikan rakyat Indonesia secara merata, peran 
+kebudayaan dalam pembangunan, derajat kesehatan dan kualitas hidup rakyat, serta 
+reformasi ketenagakerjaan. Sejalan dengan visi tersebut, Dinas Pendidikan Provinsi 
+Jawa Barat menyelenggarakan Lomba Kompetensi Siswa Sekolah Menengah 
+Kejuruan (LKS -SMK) yang diadakan setiap tahun guna mengukur pencapaian 
+kompetensi yang akan dilaksanakan secara Luring. 
+Peran serta dari kalangan dunia usaha dan dunia industri (DUDI), Perguruan  
+Tinggi, Balai Latihan Kerja (BLK) dan lainnya berkontribusi sebagai narasumber, 
+pelatih, juri dan teknisi sangat dibutuhkan agar pelaksanaan LKS SMK dari 27 
+Kabupaten/Kota serta kegiatan pendukung lainnya berjalan dengan baik, maka kami 
+menerbitkan “Panduan Teknis LKS -SMK Tingkat Provinsi Jawa Barat Tahun 2026 
+secara luring” sebagai panduan semua pihak dalam pelaksanaan LKS -SMK guna 
+mengetahui dengan baik seluruh informasi terkait pelaksanaan LKS-SMK.  
+LKS SMK Tingkat Provinsi Jawa Barat Tahun 2026 adalah salah satu kegiatan 
+yang mendorong semangat berprestasi peserta didik SMK yang diadakan setiap 
+tahun dan sebagai upaya mempromosikan lulusan SMK kepada dunia usaha dan 
+dunia industri serta pemangku kepentingan lainnya. Kami sampaikan terima kasih 
+kepada pihak yang telah berperan serta dalam penyusunan dokumen ini, dan 
+semoga Tuhan YME membalas kebaikan semua pihak. 
+ 
+--- PAGE 4 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  iv | Purwakarta, Juni 2026 
+ 
+ 
+DAFTAR ISI 
+KATA PENGANTAR .......................................................................................................................................................................... iii 
+DAFTAR ISI........................................................................................................................................................................................... iv 
+DAFTAR GAMBAR ............................................................................................................................................................................. vi 
+DAFTAR TABEL.................................................................................................................................................................................vii 
+BAB 2PENDAHULUAN .................................................................................................................................................................... 1 
+1.1 LATAR BELAKANG ........................................................................................................................................ 1 
+1.2 NAMA KEGIATAN........................................................................................................................................... 1 
+1.3 TEMA LOMBA .................................................................................................................................................. 1 
+1.4 TUJUAN LOMBA .............................................................................................................................................. 2 
+1.4.1 Tujuan Umum ...................................................................................................................................... 2 
+1.4.2 Tujuan Khusus ..................................................................................................................................... 2 
+BAB 2 PRINSIP PENYEDERHANAAN SOAL .......................................................................................................................... 3 
+BAB 3 WAKTU DAN TEMPAT PELAKSANAAN ................................................................................................................... 4 
+3.1 JADWAL PELAKSANAAN ............................................................................................................................ 5 
+BAB 4 KETENTUAN UMUM PESERTA ..................................................................................................................................... 6 
+4.1 KESIAPAN PERANGKAT PESERTA ........................................................................................................ 6 
+4.2 PERANGKAT LUNAK YANG DISARANKAN ........................................................................................ 7 
+BAB 5 DESKRIPSI STUDI KASUS ................................................................................................................................................ 8 
+5.1 AKTOR DAN ROLE SISTEM ....................................................................................................................... 8 
+5.2 ALUR BISNIS SISTEM ................................................................................................................................... 9 
+5.2.1 Alur Bisnis Hari ke-1 ........................................................................................................................ 9 
+5.2.2 Alur Bisnis Hari ke-2 ........................................................................................................................ 9 
+5.3 KETENTUAN HARI KE-1: APLIKASI FULL DESKTOP ................................................................... 9 
+5.3.1 Teknologi Hari ke-1 .......................................................................................................................... 9 
+5.3.2 Batasan Hari ke-1 ............................................................................................................................... 9 
+5.3.3 Menu Utama Hari ke-1 ................................................................................................................. 10 
+5.3.4 DETAIL FITUR APLIKASI DESKTOP HARI KE-1 ............................................................... 10 
+5.3.5 RANCANGAN DATABASE HARI KE-1 .................................................................................... 13 
+5.3.6 HAK AKSES MENU HARI KE-1 .................................................................................................. 16 
+5.4 KETENTUAN HARI KE-2: APLIKASI MOBILE DENGAN API JURI ........................................ 17 
+5.4.1 Teknologi Hari ke-2 ....................................................................................................................... 17 
+5.4.2 Batasan Hari ke-2 ............................................................................................................................ 17 
+5.4.3 Modul Aplikasi Mobile .................................................................................................................. 18 
+5.4.4 Larangan Dependency Tambahan .......................................................................................... 18 
+5.4.5 API HARI KE-2 YANG DISEDIAKAN JURI ............................................................................. 18 
+5.5 Ketentuan Umum API ............................................................................................................................... 18 
+BAB 6 PRE-TEST TEORI .............................................................................................................................................................. 20 
+--- PAGE 5 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  v | Purwakarta, Juni 2026 
+ 
+ 
+BAB 7 SKEMA PENILAIAN UMUM.......................................................................................................................................... 21 
+7.1 RUBRIK PENILAIAN................................................................................................................................... 21 
+BAB 8 SKENARIO UJI JURI .......................................................................................................................................................... 23 
+8.1 Skenario Uji .................................................................................................................................................... 23 
+BAB 9 FILE YANG HARUS DIKUMPULKAN ........................................................................................................................ 25 
+9.1 Hari ke-1 .......................................................................................................................................................... 25 
+9.2 Hari ke-2 .......................................................................................................................................................... 25 
+9.3 Format Folder yang Direkomendasikan .......................................................................................... 25 
+BAB 10 ATURAN DAN TATA TERTIB ................................................................................................................................... 26 
+BAB 11 SANKSI PELANGGARAN ............................................................................................................................................. 27 
+BAB 12 INDIKATOR KEBERHASILAN .................................................................................................................................. 28 
+BAB 13 BERITA ACARA KEGIATAN ...................................................................................................................................... 29 
+BAB 14 PENUTUP .......................................................................................................................................................................... 30 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 6 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  vi | Purwakarta, Juni 2026 
+ 
+ 
+DAFTAR GAMBAR 
+Gambar 1. Contoh Response Daftar Pesanan ..................................................................... 19 
+Gambar 2. Contoh Response Detail Pesanan ...................................................................... 19 
+Gambar 3. Contoh Request Update Status ........................................................................... 19 
+Gambar 4. Struktur Folder .......................................................................................................... 25 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 7 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  vii | Purwakarta, Juni 2026 
+ 
+ 
+DAFTAR TABEL 
+Tabel 1. Tempat dan Pelaksanaan Lomba.............................................................................................................................. 4 
+Tabel 2. Pembagian Agenda Lomba dalam 2 Hari.............................................................................................................. 4 
+Tabel 3. Hari ke-1 — Aplikasi Desktop (Rabu, 10 Juni 2026) ...................................................................................... 5 
+Tabel 4. Hari ke-2 — Aplikasi Mobile (Kamis, 11 Juni 2026) ....................................................................................... 5 
+Tabel 5. Kebutuhan Perangkat .................................................................................................................................................... 6 
+Tabel 6. Role Hari ke-1 — Aplikasi Desktop ......................................................................................................................... 8 
+Tabel 7. Role Hari ke-2 — Aplikasi Mobile ............................................................................................................................ 8 
+Tabel 8. Detail Dashboard ........................................................................................................................................................... 10 
+Tabel 9. Detail Data Pegawai ..................................................................................................................................................... 11 
+Tabel 10. Detail Data Bahan Baku ........................................................................................................................................... 11 
+Tabel 11. Detail Data Nama Sekolah Penerima ................................................................................................................ 11 
+Tabel 12. Detail Data Kebutuhan Dapur SPPG .................................................................................................................. 12 
+Tabel 13. Detail Data Pesanan ke Pemasok ........................................................................................................................ 12 
+Tabel 14. Detail Monitoring Produksi dan Distribusi .................................................................................................... 13 
+Tabel 15. Detail Laporan ............................................................................................................................................................. 13 
+Tabel 16. Daftar Tabel untuk Database ................................................................................................................................ 13 
+Tabel 17. Table User ...................................................................................................................................................................... 14 
+Tabel 18. Table Employess ......................................................................................................................................................... 14 
+Tabel 19. Table RawMaterials .................................................................................................................................................. 15 
+Tabel 20. Table Schools ................................................................................................................................................................ 15 
+Tabel 21. Table KitchenNeeds .................................................................................................................................................. 15 
+Tabel 22. Table SupplierOrders ............................................................................................................................................... 16 
+Tabel 23. Table ProductionDistribution .............................................................................................................................. 16 
+Tabel 24. Hak Akses Menu Hari ke-1 ..................................................................................................................................... 16 
+Tabel 25. Modul Minimal Aplikasi Mobile........................................................................................................................... 18 
+Tabel 26. Contoh Endpoint API ................................................................................................................................................ 18 
+Tabel 27. Bobot Penilaian ........................................................................................................................................................... 21 
+Tabel 28. Rubrik Penilaian Pre-Test ...................................................................................................................................... 21 
+Tabel 29. Rubrik Penilaian Desktop Hari ke-1.................................................................................................................. 21 
+Tabel 30. Rubrik Penilaian Mobile Hari ke-2..................................................................................................................... 22 
+Tabel 31. Skenario Uji Desktop Hari ke-1 ........................................................................................................................... 23 
+Tabel 32. Skenario Uji Mobile Hari ke-2 .............................................................................................................................. 24 
+Tabel 33. Pelanggaran dan Sanksi .......................................................................................................................................... 27 
+--- PAGE 8 ---
+BAB 1  
+PENDAHULUAN 
+1.1 LATAR BELAKANG 
+Program penyediaan makanan bergizi membutuhkan sistem operasional yang 
+mampu membantu pencatatan kebutuhan dapur, pemesanan bahan baku, proses 
+produksi, dan distribusi makanan kepada sekolah penerima. Dalam operasional 
+Satuan Pelayanan Pemenuhan Gizi (SPPG), proses tersebut perlu dilakukan secara 
+rapi, terdata, mudah dipantau, dan dapat dilaporkan secara sederhana. 
+Pada kondisi manual, pengelolaan kebutuhan bahan baku sering menghadapi 
+berbagai kendala, antara lain: 
+1. Data kebutuhan dapur tidak terdokumentasi dengan rapi. 
+2. Data bahan baku dan pemasok sulit dicari kembali. 
+3. Proses pemesanan bahan ke pemasok belum tercatat secara sistematis. 
+4. Supervisor kesulitan memantau status pemesanan, produksi, dan 
+distribusi. 
+5. Laporan kegiatan operasional sulit disusun secara cepat. 
+Oleh karena itu, pada LKS SMK Jawa Barat 2026 kategori IT Software Solution 
+for Business, peserta diminta membuat sistem sederhana bertema Smart Meal 
+Distribution System dalam dua bagian utama: aplikasi full desktop (hari pertama) 
+dan aplikasi mobile Android (hari kedua). 
+1.2 NAMA KEGIATAN 
+Komponen Keterangan 
+Nama Kegiatan Lomba Kompetensi Siswa SMK Tingkat Provinsi Jawa Barat 2026 
+Kategori IT Software Solution for Business 
+Tema Smart Meal Distribution System 
+1.3 TEMA LOMBA 
+Adapun tema dalam ini adalah:  
+ 
+ 
+Smart Meal Distribution System 
+Sistem Operasional SPPG untuk Kebutuhan Dapur, Pemesanan Bahan, 
+Produksi, dan Distribusi 
+ 
+--- PAGE 9 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  2 | Purwakarta, Juni 2026 
+ 
+ 
+1.4 TUJUAN LOMBA 
+1.4.1 Tujuan Umum 
+Mengukur kompetensi peserta SMK dalam membangun aplikasi bisnis 
+sederhana berbasis desktop dan mobile sesuai kebutuhan studi kasus, batasan 
+teknologi, waktu pengerjaan, dan rubrik penilaian yang ditetapkan oleh juri. 
+1.4.2 Tujuan Khusus 
+1. Menguji kemampuan peserta membuat aplikasi desktop menggunakan 
+C#. 
+2. Menguji kemampuan peserta menggunakan database SQL Server. 
+3. Menguji kemampuan peserta membuat login dan pembagian role 
+sederhana. 
+4. Menguji kemampuan peserta membuat CRUD data operasional SPPG. 
+5. Menguji kemampuan peserta membuat pencatatan kebutuhan dapur 
+SPPG. 
+6. Menguji kemampuan peserta membuat pencatatan pesanan bahan baku 
+ke pemasok. 
+7. Menguji kemampuan peserta membuat monitoring produksi dan 
+distribusi secara sederhana. 
+8. Menguji kemampuan peserta membuat laporan sederhana. 
+9. Menguji kemampuan peserta membuat aplikasi mobile Android 
+menggunakan Java atau Kotlin. 
+10. Menguji kemampuan peserta membaca dokumentasi API, memahami 
+JSON, dan menggunakan API yang disediakan juri. 
+11. Menguji kemandirian, ketelitian, kedisiplinan, dan kemampuan 
+menyelesaikan pekerjaan sesuai durasi lomba. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 10 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  3 | Purwakarta, Juni 2026 
+ 
+ 
+ 
+BAB 2  
+PRINSIP PENYEDERHANAAN SOAL 
+Karena peserta adalah siswa SMK dan waktu efektif pengerjaan sekitar 4,5 jam 
+per hari, cakupan soal disederhanakan dengan prinsip berikut: 
+1. Fitur difokuskan pada kebutuhan utama. 
+2. Jumlah tabel database dibatasi pada kebutuhan minimal. 
+3. Jumlah form desktop dibuat secukupnya. 
+4. Tidak ada pembuatan Web API oleh peserta. 
+5. Tidak ada sistem autentikasi kompleks. 
+6. Tidak ada enkripsi password wajib. 
+7. Tidak ada grafik dashboard kompleks. 
+8. Tidak ada export Excel wajib. 
+9. Tidak ada cetak laporan PDF wajib. 
+10. Tidak ada fitur notifikasi. 
+11. Tidak ada fitur stok otomatis yang rumit. 
+12. Tidak ada perhitungan gizi. 
+13. Tidak ada integrasi pembayaran. 
+14. Penilaian difokuskan pada aplikasi yang dapat berjalan, data tersimpan, alur 
+utama benar, UI rapi, dan hasil dapat diuji oleh juri. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 11 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  4 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 3  
+WAKTU DAN TEMPAT PELAKSANAAN 
+Dalam menjamin kelancaran dan efektivitas pelaksanaan kegiatan, Tim telah 
+menetapkan jadwal serta lokasi penyelenggaraan yang disesuaikan dengan 
+kebutuhan masing -masing bidang lomba. Informasi mengenai waktu dan tempat 
+pelaksanaan LKS Jawa Barat Tahun 202 6 disampaikan sebagai acuan bagi seluruh 
+peserta, pendamping, juri, dan pihak terkait dalam mempersiapkan serta mengikuti 
+kegiatan secara optimal. 
+Selanjutnya, rincian waktu dan tempat pelaksanaan LKS Jawa Barat Tahun 
+2026 dapat dilihat pada tabel berikut. 
+Tabel 1. Tempat dan Pelaksanaan Lomba 
+Komponen Keterangan 
+Tempat Pelaksanaan SMKN 2 Purwakarta 
+Tanggal Pelaksanaan 10–11 Juni 2026 
+Kategori IT Software Solution for Business 
+Tema Smart Meal Distribution System 
+Sifat Pelaksanaan Mandiri dan Tertutup 
+Durasi Efektif Pengerjaan ± 4,5 jam per hari 
+Tabel 2. Pembagian Agenda Lomba dalam 2 Hari 
+Hari Pekerjaan Utama 
+Hari 
+ke-1 
+Peserta membuat aplikasi full desktop berbasis C# dan SQL Server. Petugas 
+SPPG dapat menginput kebutuhan dapur, data bahan baku, data sekolah 
+penerima, data pegawai, dan pesanan ke pemasok. Supervisor SPPG dapat 
+melihat dashboard, proses pemesanan, produksi, distribusi, dan laporan 
+sederhana. Tidak ada API pada hari pertama. 
+Hari 
+ke-2 
+Peserta membuat aplikasi mobile Android berbasis Java atau Kotlin untuk 
+pemasok. Aplikasi mobile menggunakan API web yang disediakan oleh juri. 
+Peserta tidak membuat API, tetapi wajib membaca dokumentasi API, 
+menguji endpoint menggunakan Postman atau Swagger, dan 
+mengintegrasikan API ke aplikasi mobile. 
+ 
+--- PAGE 12 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  5 | Purwakarta, Juni 2026 
+ 
+ 
+3.1 JADWAL PELAKSANAAN 
+Adapun detail pelaksanaan dari lomba selama 2 hari 
+Tabel 3. Hari ke-1 — Aplikasi Desktop (Rabu, 10 Juni 2026) 
+Waktu Kegiatan 
+07.40–08.05 Registrasi, pengecekan peserta dan perangkat, serta 
+pengarahan awal oleh juri. 
+08.05–08.35 Pre-test teori selama 30 menit. 
+08.40–12.40 Pengerjaan aplikasi desktop C# dan SQL Server (± 4 jam). 
+12.40–13.40 Istirahat, salat, dan makan. 
+13.40–14.30 Finalisasi aplikasi, pengemasan file, dan pengumpulan hasil hari 
+ke-1. 
+14.30–17.00 Pemeriksaan hasil hari ke-1 oleh juri. 
+Catatan: Waktu efektif pengerjaan hari pertama adalah ± 4,5 jam (08.40 –12.40 dan finalisasi 13.40 –
+14.30). 
+Tabel 4. Hari ke-2 — Aplikasi Mobile (Kamis, 11 Juni 2026) 
+Waktu Kegiatan 
+07.40–08.05 Registrasi hari kedua, pengecekan perangkat, penjelasan API, 
+dan pengecekan dokumentasi API. 
+08.05–12.30 Pengerjaan aplikasi mobile Android menggunakan API juri (± 
+4,5 jam). 
+12.30–13.30 Istirahat, salat, dan makan. 
+13.30–14.30 Finalisasi aplikasi, build APK jika diminta, pengemasan file, dan 
+pengumpulan hasil hari ke-2. 
+14.30–16.30 Pemeriksaan aplikasi mobile oleh juri. 
+16.30–17.00 Post-test atau klarifikasi untuk 3 peserta terbaik jika 
+diperlukan. 
+17.00–17.30 Rekapitulasi nilai dan validasi hasil. 
+ 
+ 
+--- PAGE 13 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  6 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 4  
+KETENTUAN UMUM PESERTA 
+Peserta Lomba Kompetensi Siswa (LKS) Jawa Barat Tahun 2026 adalah siswa 
+aktif Sekolah Menengah Kejuruan (SMK) yang telah ditetapkan dan 
+direkomendasikan oleh sekolah serta memenuhi persyaratan sesuai bidang lomba 
+yang diikuti. Setiap peserta wajib mematuhi seluruh ketentuan dan tata tertib yang 
+berlaku, menjaga sportivitas, integritas, serta menjunjung tinggi nilai kejujuran 
+selama proses perlombaan berlangsung. Peserta juga bertanggung jawab untuk 
+mengikuti seluruh rangkaian kegiatan sesuai jadwal yang telah ditetapkan, 
+melengkapi dokumen administrasi yang dipersyaratkan, serta menggunakan 
+perlengkapan dan perangkat yang sesuai dengan aturan masing -masing bidang 
+lomba guna mendukung kelancaran dan keberhasilan pelaksanaan LKS Jawa Barat 
+Tahun 2026. Adapun ketentuan yang wajib untuk setiap peserta: 
+1. Hadir tepat waktu sesuai jadwal yang ditetapkan. 
+2. Melakukan registrasi sesuai arahan panitia. 
+3. Membawa laptop masing -masing dengan spesifikasi minimal yang 
+disyaratkan. 
+4. Memastikan seluruh perangkat lunak yang dibutuhkan sudah terpasang 
+sebelum hari pelaksanaan. 
+5. Mengerjakan soal secara mandiri tanpa bantuan siapapun. 
+6. Tidak bekerja sama dengan peserta lain dalam bentuk apapun. 
+7. Tidak menerima bantuan teknis dari pembimbing atau pihak luar. 
+8. Mengumpulkan hasil pekerjaan sesuai waktu dan format yang ditetapkan. 
+9. Menjaga ketertiban dan kebersihan selama lomba berlangsung. 
+10. Mengikuti seluruh arahan panitia dan juri. 
+4.1 KESIAPAN PERANGKAT PESERTA 
+Dalam mendukung kelancaran pelaksanaan Lomba Kompetensi Siswa (LKS) 
+Jawa Barat Tahun 202 6, setiap peserta wajib memastikan seluruh perangkat yang 
+digunakan telah dipersiapkan dengan baik sesuai dengan ketentuan bidang lomba 
+masing-masing. Adapun kebutuhan yang perlu disiapkan, antara lain: 
+Tabel 5. Kebutuhan Perangkat 
+Komponen Spesifikasi Minimal 
+Ukuran Layar Minimal 13 inci 
+RAM Minimal 8 GB 
+Penyimpanan HDD/SSD minimal 500 GB 
+--- PAGE 14 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  7 | Purwakarta, Juni 2026 
+ 
+ 
+Komponen Spesifikasi Minimal 
+Sistem Operasi Windows 10/11 atau sistem yang mendukung tools 
+lomba 
+Koneksi Internet Mandiri menggunakan tethering mobile phone 
+Perlengkapan 
+Tambahan Charger laptop dan alat tulis pribadi 
+4.2 PERANGKAT LUNAK YANG DISARANKAN 
+Berikut perangkat lunak yang disarankan untuk kelancaran lomba: 
+1. Visual Studio (versi terbaru) untuk pengembangan C# desktop. 
+2. SQL Server dan SQL Server Management Studio (SSMS). 
+3. Android Studio (versi stabil terbaru). 
+4. Java Development Kit (JDK) atau konfigurasi Kotlin sesuai kebutuhan. 
+5. Postman atau tool testing API sejenis. 
+6. Browser modern untuk membaca dokumentasi API atau Swagger UI. 
+7. Aplikasi kompresi file (WinRAR, 7-Zip, atau ZIP bawaan OS). 
+8. Text editor untuk membuat file README. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 15 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  8 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 5  
+DESKRIPSI STUDI KASUS 
+SPPG (Satuan Pelayanan Pemenuhan Gizi) merupakan unit yang menyiapkan 
+makanan untuk sekolah penerima. Setiap hari, Petugas SPPG perlu menginput 
+kebutuhan dapur, bahan baku yang diperlukan untuk produksi makanan, kemudian 
+bahan baku dipesan kepada pemasok. Setelah bahan tersedia, proses produksi 
+dilakukan, lalu makanan didistribusikan kepada sekolah penerima. 
+Sistem yang dibuat peserta harus mendukung proses utama berikut: 
+1. Pencatatan data pegawai SPPG. 
+2. Pencatatan data bahan baku. 
+3. Pencatatan data sekolah penerima. 
+4. Pencatatan kebutuhan dapur SPPG. 
+5. Pencatatan pesanan bahan baku ke pemasok. 
+6. Monitoring sederhana proses pemesanan, produksi, dan distribusi. 
+7. Laporan sederhana dalam bentuk tabel. 
+8. Profil pengguna. 
+5.1 AKTOR DAN ROLE SISTEM 
+Tabel 6. Role Hari ke-1 — Aplikasi Desktop 
+Role Hak Akses Utama 
+Petugas 
+SPPG 
+Menginput dan mengelola data operasional: data pegawai, data 
+bahan baku, data sekolah penerima, kebutuhan dapur SPPG, dan 
+pesanan ke pemasok. 
+Supervisor 
+SPPG 
+Melihat dashboard, memantau proses pemesanan, produksi, 
+distribusi, melihat laporan, dan melakukan validasi status 
+sederhana jika diperlukan. 
+Tabel 7. Role Hari ke-2 — Aplikasi Mobile 
+Role Hak Akses Utama 
+Pemasok Login ke aplikasi mobile, melihat daftar pesanan, melihat detail pesanan, 
+dan mengubah status pesanan melalui API yang disediakan juri. 
+ 
+--- PAGE 16 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  9 | Purwakarta, Juni 2026 
+ 
+ 
+5.2 ALUR BISNIS SISTEM 
+5.2.1 Alur Bisnis Hari ke-1 
+1. Petugas SPPG login ke aplikasi desktop. 
+2. Petugas SPPG menginput data pegawai. 
+3. Petugas SPPG menginput data bahan baku. 
+4. Petugas SPPG menginput data sekolah penerima. 
+5. Petugas SPPG menginput kebutuhan dapur SPPG. 
+6. Petugas SPPG membuat pesanan bahan baku ke pemasok (status 
+awal: Pending). 
+7. Status pesanan dapat diubah menjadi Diproses atau Selesai. 
+8. Petugas SPPG menginput data produksi dan distribusi sederhana. 
+9. Supervisor SPPG login ke sistem. 
+10. Supervisor SPPG melihat dashboard. 
+11. Supervisor SPPG memantau proses pemesanan, produksi, dan 
+distribusi. 
+12. Supervisor SPPG melihat laporan sederhana. 
+5.2.2 Alur Bisnis Hari ke-2 
+1. Pemasok login ke aplikasi mobile. 
+2. Aplikasi mobile mengirim request login ke API juri. 
+3. Pemasok melihat daftar pesanan dari API. 
+4. Pemasok membuka detail pesanan. 
+5. Pemasok mengubah status pesanan menjadi Diproses. 
+6. Pemasok mengubah status pesanan menjadi Dikirim jika pesanan 
+sudah dikirim. 
+7. Aplikasi menampilkan pesan berhasil atau gagal berdasarkan 
+response API. 
+5.3 KETENTUAN HARI KE-1: APLIKASI FULL DESKTOP 
+5.3.1 Teknologi Hari ke-1 
+• Bahasa pemrograman: C# 
+• Framework UI: Windows Forms atau WPF 
+• Database: SQL Server 
+• Koneksi: langsung dari aplikasi desktop ke SQL Server 
+5.3.2 Batasan Hari ke-1 
+1. Peserta hanya membuat aplikasi desktop. 
+2. Peserta tidak membuat Web API. 
+--- PAGE 17 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  10 | Purwakarta, Juni 2026 
+ 
+ 
+3. Peserta tidak melakukan integrasi API. 
+4. Peserta tidak membuat aplikasi mobile. 
+5. Export Excel bersifat opsional, tidak diwajibkan. 
+6. Peserta cukup membuat menu utama, CRUD sederhana, validasi 
+dasar, dan laporan tabel sederhana. 
+5.3.3 Menu Utama Hari ke-1 
+1. Dashboard 
+2. Data Pegawai 
+3. Data Bahan Baku 
+4. Data Nama Sekolah Penerima 
+5. Data Kebutuhan Dapur SPPG 
+6. Data Pesanan ke Pemasok 
+7. Monitoring Produksi dan Distribusi 
+8. Laporan 
+9. Profil 
+10. Logout 
+5.3.4 DETAIL FITUR APLIKASI DESKTOP HARI KE-1 
+1. Dashboard 
+Dashboard menampilkan ringkasan data utama sistem: 
+Tabel 8. Detail Dashboard 
+No. Komponen Keterangan 
+1 Total Pegawai Menampilkan jumlah pegawai yang tercatat. 
+2 Total Bahan Baku Menampilkan jumlah jenis bahan baku. 
+3 Total Sekolah 
+Penerima Menampilkan jumlah sekolah penerima. 
+4 Total Pesanan Menampilkan jumlah pesanan ke pemasok. 
+5 Status Pesanan Menampilkan jumlah pesanan: Pending, Diproses, 
+dan Selesai. 
+6 Ringkasan Distribusi Menampilkan jumlah data distribusi yang tercatat. 
+ 
+ 
+ 
+--- PAGE 18 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  11 | Purwakarta, Juni 2026 
+ 
+ 
+2. Data Pegawai 
+Tabel 9. Detail Data Pegawai 
+No. Fitur Keterangan 
+1 Tambah Pegawai Menambahkan data pegawai baru. 
+2 Tampil Pegawai Menampilkan daftar pegawai dalam tabel. 
+3 Ubah Pegawai Mengubah data pegawai. 
+4 Hapus Pegawai Menghapus data pegawai. 
+5 Cari Pegawai Mencari berdasarkan nama atau jabatan. 
+Catatan: Field minimal: ID Pegawai, Nama Pegawai, Jabatan, Nomor HP, Alamat. 
+3. Data Bahan Baku 
+Tabel 10. Detail Data Bahan Baku 
+No. Fitur Keterangan 
+1 Tambah Bahan Menambahkan data bahan baku. 
+2 Tampil Bahan Menampilkan daftar bahan baku. 
+3 Ubah Bahan Mengubah data bahan baku. 
+4 Hapus Bahan Menghapus data bahan baku. 
+5 Cari Bahan Mencari berdasarkan nama bahan. 
+Catatan:  
+• Field minimal: ID Bahan, Nama Bahan, Kategori Bahan, Satuan, Stok Awal, Harga 
+Perkiraan. 
+• Contoh bahan: beras, telur, daging ayam, sayuran, minyak goreng, bumbu dasar. 
+4. Data Nama Sekolah Penerima 
+Tabel 11. Detail Data Nama Sekolah Penerima 
+No. Fitur Keterangan 
+1 Tambah Sekolah Menambahkan data sekolah penerima. 
+2 Tampil Sekolah Menampilkan daftar sekolah penerima. 
+3 Ubah Sekolah Mengubah data sekolah. 
+--- PAGE 19 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  12 | Purwakarta, Juni 2026 
+ 
+ 
+No. Fitur Keterangan 
+4 Hapus Sekolah Menghapus data sekolah. 
+5 Cari Sekolah Mencari berdasarkan nama sekolah. 
+Catatan: Field minimal: ID Sekolah, Nama Sekolah, Alamat, Nama PIC, Nomor HP PIC, 
+Jumlah Siswa. 
+5. Data Kebutuhan Dapur SPPG 
+Tabel 12. Detail Data Kebutuhan Dapur SPPG 
+No. Fitur Keterangan 
+1 Input Kebutuhan 
+Dapur 
+Petugas menginput tanggal kebutuhan, bahan baku, 
+jumlah kebutuhan, dan keterangan. 
+2 Tampil 
+Kebutuhan Menampilkan daftar kebutuhan dapur. 
+3 Ubah Kebutuhan Mengubah data kebutuhan. 
+4 Hapus Kebutuhan Menghapus data kebutuhan yang salah. 
+5 Cari Kebutuhan Mencari berdasarkan tanggal atau nama bahan. 
+Catatan: Field minimal: ID Kebutuhan, Tanggal Kebutuhan, Nama Bahan (FK), Jumlah 
+Kebutuhan, Satuan, Keterangan. 
+6. Data Pesanan ke Pemasok 
+Tabel 13. Detail Data Pesanan ke Pemasok 
+No. Fitur Keterangan 
+1 Buat Pesanan Petugas membuat pesanan bahan baku ke pemasok. 
+2 Tampil Pesanan Menampilkan daftar pesanan. 
+3 Ubah Pesanan Mengubah data pesanan. 
+4 Hapus Pesanan Menghapus pesanan jika terjadi kesalahan input. 
+5 Update Status Mengubah status: Pending → Diproses → Selesai. 
+Catatan: Field minimal: ID Pesanan, Tanggal Pesanan, Nama Pemasok, Nama Bahan 
+(FK), Jumlah Pesan, Satuan, Status Pesanan, Catatan. 
+ 
+--- PAGE 20 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  13 | Purwakarta, Juni 2026 
+ 
+ 
+7. Monitoring Produksi dan Distribusi 
+Tabel 14. Detail Monitoring Produksi dan Distribusi 
+No. Fitur Keterangan 
+1 Monitoring 
+Produksi 
+Menampilkan tanggal produksi, keterangan, dan status 
+produksi. 
+2 Monitoring 
+Distribusi 
+Menampilkan sekolah penerima, jumlah porsi, dan 
+status distribusi. 
+3 Update Status Status dapat diubah: Belum Diproses → Diproses → 
+Selesai. 
+4 Filter Data Data dapat difilter berdasarkan tanggal atau status. 
+Catatan: Field minimal: ID Monitoring, Tanggal, Nama Sekolah (FK), Jumlah Porsi, 
+Keterangan Produksi, Status Produksi, Status Distribusi. 
+8. Laporan 
+Tabel 15. Detail Laporan  
+No. Jenis Laporan Keterangan 
+1 Laporan Bahan Baku Menampilkan daftar bahan baku dan stok awal. 
+2 Laporan Kebutuhan 
+Dapur 
+Menampilkan kebutuhan bahan berdasarkan 
+tanggal. 
+3 Laporan Pesanan Menampilkan daftar pesanan ke pemasok dan 
+statusnya. 
+4 Laporan Distribusi Menampilkan data distribusi ke sekolah penerima. 
+9. Profil 
+Menu Profil menampilkan informasi pengguna yang sedang login. 
+Catatab: Field minimal: Username, Nama Pengguna, Role, Jabatan. 
+5.3.5 RANCANGAN DATABASE HARI KE-1 
+10. Daftar Tabel Minimal 
+Tabel 16. Daftar Tabel untuk Database 
+Nama Tabel Keterangan 
+Users Menyimpan data login pengguna dan role (PetugasSPPG / 
+SupervisorSPPG). 
+--- PAGE 21 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  14 | Purwakarta, Juni 2026 
+ 
+ 
+Nama Tabel Keterangan 
+Employees Menyimpan data pegawai SPPG. 
+RawMaterials Menyimpan data bahan baku. 
+Schools Menyimpan data sekolah penerima. 
+KitchenNeeds Menyimpan data kebutuhan dapur SPPG. 
+SupplierOrders Menyimpan data pesanan bahan baku ke pemasok. 
+ProductionDistribution Menyimpan data monitoring produksi dan distribusi. 
+11. Struktur Tabel Users 
+Tabel 17. Table User 
+Field Tipe Data Keterangan 
+UserId int, PK, identity ID pengguna (auto increment). 
+Username varchar(50) Username login. 
+Password varchar(50) Password sederhana. 
+FullName varchar(100) Nama lengkap pengguna. 
+Role varchar(30) PetugasSPPG atau SupervisorSPPG. 
+Position varchar(50) Jabatan pengguna. 
+12. Struktur Tabel Employees 
+Tabel 18. Table Employess 
+Field Tipe Data Keterangan 
+EmployeeId int, PK, identity ID pegawai. 
+EmployeeName varchar(100) Nama pegawai. 
+Position varchar(50) Jabatan pegawai. 
+Phone varchar(30) Nomor HP. 
+Address varchar(200) Alamat pegawai. 
+ 
+ 
+--- PAGE 22 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  15 | Purwakarta, Juni 2026 
+ 
+ 
+13. Struktur Tabel RawMaterials 
+Tabel 19. Table RawMaterials 
+Field Tipe Data Keterangan 
+MaterialId int, PK, identity ID bahan baku. 
+MaterialName varchar(100) Nama bahan baku. 
+Category varchar(50) Kategori bahan. 
+Unit varchar(20) Satuan (kg, liter, butir, dll.). 
+Stock decimal(18,2) Stok awal / stok tersedia. 
+EstimatedPrice decimal(18,2) Harga perkiraan. 
+14. Struktur Tabel Schools 
+Tabel 20. Table Schools 
+Field Tipe Data Keterangan 
+SchoolId int, PK, identity ID sekolah. 
+SchoolName varchar(100) Nama sekolah penerima. 
+Address varchar(200) Alamat sekolah. 
+PICName varchar(100) Nama penanggung jawab sekolah. 
+PICPhone varchar(30) Nomor HP penanggung jawab. 
+StudentCount int Jumlah siswa penerima. 
+15. Struktur Tabel KitchenNeeds 
+Tabel 21. Table KitchenNeeds 
+Field Tipe Data Keterangan 
+NeedId int, PK, identity ID kebutuhan dapur. 
+NeedDate date Tanggal kebutuhan. 
+MaterialId int, FK Relasi ke tabel RawMaterials. 
+Quantity decimal(18,2) Jumlah kebutuhan. 
+Unit varchar(20) Satuan. 
+--- PAGE 23 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  16 | Purwakarta, Juni 2026 
+ 
+ 
+Field Tipe Data Keterangan 
+Notes varchar(200) Catatan kebutuhan. 
+ 
+16. Struktur Tabel SupplierOrders 
+Tabel 22. Table SupplierOrders 
+Field Tipe Data Keterangan 
+OrderId int, PK, identity ID pesanan. 
+OrderDate date Tanggal pesanan. 
+SupplierName varchar(100) Nama pemasok. 
+MaterialId int, FK Relasi ke tabel RawMaterials. 
+OrderQuantity decimal(18,2) Jumlah bahan yang dipesan. 
+Unit varchar(20) Satuan. 
+Status varchar(30) Pending, Diproses, atau Selesai. 
+Notes varchar(200) Catatan pesanan. 
+17. Struktur Tabel ProductionDistribution 
+Tabel 23. Table ProductionDistribution 
+Field Tipe Data Keterangan 
+ProcessId int, PK, identity ID proses. 
+ProcessDate date Tanggal proses. 
+SchoolId int, FK Relasi ke tabel Schools. 
+PortionCount int Jumlah porsi yang didistribusikan. 
+ProductionStatus varchar(30) Belum Diproses, Diproses, atau Selesai. 
+DistributionStatus varchar(30) Belum Dikirim, Dikirim, atau Selesai. 
+Notes varchar(200) Catatan produksi atau distribusi. 
+5.3.6 HAK AKSES MENU HARI KE-1 
+Tabel 24. Hak Akses Menu Hari ke-1 
+Menu Petugas SPPG Supervisor SPPG 
+Dashboard Lihat Lihat 
+--- PAGE 24 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  17 | Purwakarta, Juni 2026 
+ 
+ 
+Menu Petugas SPPG Supervisor SPPG 
+Data Pegawai Tambah, Ubah, Hapus, Lihat Lihat 
+Data Bahan Baku Tambah, Ubah, Hapus, Lihat Lihat 
+Data Nama Sekolah 
+Penerima Tambah, Ubah, Hapus, Lihat Lihat 
+Data Kebutuhan Dapur 
+SPPG Tambah, Ubah, Hapus, Lihat Lihat 
+Data Pesanan ke 
+Pemasok 
+Tambah, Ubah, Hapus, Lihat, 
+Update Status Lihat 
+Monitoring Produksi & 
+Distribusi Tambah, Ubah, Lihat Lihat, Validasi / 
+Update Status 
+Laporan Lihat Lihat 
+Profil Lihat Lihat 
+5.4 KETENTUAN HARI KE-2: APLIKASI MOBILE DENGAN API JURI 
+5.4.1 Teknologi Hari ke-2 
+• Java atau Kotlin 
+• Android Native 
+• API web yang disediakan oleh juri 
+• JSON sebagai format pertukaran data 
+• Request API menggunakan fitur native bawaan Java/Kotlin 
+5.4.2 Batasan Hari ke-2 
+1. Peserta hanya membuat aplikasi mobile. 
+2. Peserta tidak membuat API. 
+3. Peserta menggunakan API yang disediakan juri. 
+4. Peserta cukup membuat fitur utama pemasok. 
+5. UI kompleks tidak diwajibkan. 
+6. Fitur offline tidak diwajibkan. 
+7. Notifikasi tidak diwajibkan. 
+8. Grafik atau laporan tidak diwajibkan. 
+ 
+ 
+ 
+ 
+--- PAGE 25 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  18 | Purwakarta, Juni 2026 
+ 
+ 
+5.4.3 Modul Aplikasi Mobile 
+Tabel 25. Modul Minimal Aplikasi Mobile 
+No. Modul Fungsi Minimal 
+1 Login Pemasok Pemasok login melalui API yang disediakan juri. 
+2 Daftar Pesanan Menampilkan daftar pesanan dari API. 
+3 Detail Pesanan Menampilkan detail pesanan dan bahan yang dipesan. 
+4 Update Status Mengubah status pesanan menjadi Diproses atau Dikirim. 
+5 Pesan Error Menampilkan pesan jika login gagal, API tidak aktif, atau 
+data kosong. 
+5.4.4 Larangan Dependency Tambahan 
+Library berikut DILARANG digunakan untuk request API: 
+• Retrofit (beserta semua adapter-nya) 
+• Ktor Client 
+• Volley 
+• OkHttp tambahan 
+• Library HTTP eksternal lainnya 
+Request API WAJIB menggunakan fitur native bawaan Java/Kotlin: 
+• HttpURLConnection 
+• URL 
+• InputStream 
+• OutputStream 
+• JSONObject / JSONArray 
+5.4.5 API HARI KE-2 YANG DISEDIAKAN JURI 
+5.5 Ketentuan Umum API 
+API pada hari kedua disediakan dan dijalankan sepenuhnya oleh juri. Peserta 
+tidak membuat API sendiri. API digunakan untuk: login pemasok, mengambil daftar 
+pesanan, mengambil detail pesanan, dan mengubah status pesanan. 
+Tabel 26. Contoh Endpoint API 
+Method Endpoint Fungsi 
+POST /auth/login Login pemasok. 
+GET /orders Mengambil daftar pesanan. 
+--- PAGE 26 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  19 | Purwakarta, Juni 2026 
+ 
+ 
+Method Endpoint Fungsi 
+GET /orders/{id} Mengambil detail pesanan. 
+PUT /orders/{id}/status Mengubah status pesanan. 
+ 
+[ 
+  { 
+    "orderId": 1, 
+    "supplierName": "CV Pangan Sejahtera", 
+    "orderDate": "2026-06-10", 
+    "status": "Pending" 
+  } 
+] 
+Gambar 1. Contoh Response Daftar Pesanan 
+{ 
+  "orderId": 1, 
+  "supplierName": "CV Pangan Sejahtera", 
+  "status": "Pending", 
+  "items": [ 
+    { "itemName": "Beras",  "quantity": 100, "unit": "kg"    }, 
+    { "itemName": "Telur", "quantity": 500, "unit": "butir" } 
+  ] 
+} 
+Gambar 2. Contoh Response Detail Pesanan 
+PUT /api/orders/1/status 
+Content-Type: application/json 
+ 
+{ 
+  "status": "Diproses" 
+} 
+Gambar 3. Contoh Request Update Status 
+ 
+ 
+ 
+ 
+--- PAGE 27 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  20 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 6  
+PRE-TEST TEORI 
+Pre-test dilaksanakan pada hari pertama selama 30 menit. Materi pre -test 
+meliputi: 
+1. Dasar pemrograman (variabel, tipe data, struktur kontrol, OOP). 
+2. Dasar C# (sintaks, Windows Forms/WPF). 
+3. Dasar database dan SQL (DDL, DML, relasi tabel). 
+4. Konsep CRUD (Create, Read, Update, Delete). 
+5. Dasar aplikasi mobile Android. 
+6. Konsep REST API. 
+7. Format JSON (request dan response). 
+8. Pemahaman alur aplikasi bisnis sederhana. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 28 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  21 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 7  
+SKEMA PENILAIAN UMUM 
+Penilaian pada Lomba Kompetensi Siswa (LKS) Jawa Barat Tahun 202 6 
+dilaksanakan secara objektif, transparan, dan terukur berdasarkan standar 
+kompetensi yang telah ditetapkan untuk masing -masing bidang lomba. Seluruh 
+proses penilaian dilakukan oleh dewan juri.  
+Tabel 27. Bobot Penilaian 
+No. Komponen Bobot 
+1 Pre-test Teori 10% 
+2 Aplikasi Desktop Hari ke-1 45% 
+3 Aplikasi Mobile Hari ke-2 45% 
+Total 100% 
+Adapun Formula Nilai Akhir: 
+Nilai Akhir = (0,10 × Nilai Pre-Test) + (0,45 × Nilai Desktop) + (0,45 × Nilai 
+Mobile) 
+Keterangan: 
+• Nilai Pre-Test  : Nilai teori dalam skala 0–100. 
+• Nilai Desktop   : Nilai aplikasi desktop hari ke-1 dalam skala 0–100. 
+• Nilai Mobile    : Nilai aplikasi mobile hari ke-2 dalam skala 0–100. 
+• Nilai Akhir     : Digunakan sebagai dasar penentuan peringkat. 
+7.1 RUBRIK PENILAIAN  
+Tabel 28. Rubrik Penilaian Pre-Test 
+No. Aspek Bobot 
+1 Dasar pemrograman 30% 
+2 Dasar database dan SQL 30% 
+3 Dasar API dan JSON 25% 
+4 Pemahaman alur aplikasi bisnis sederhana 15% 
+Total 100% 
+Tabel 29. Rubrik Penilaian Desktop Hari ke-1 
+--- PAGE 29 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  22 | Purwakarta, Juni 2026 
+ 
+ 
+No. Aspek Penilaian Bobot 
+1 Project C# dapat dibuka, dijalankan, dan memiliki struktur yang 
+rapi. 10% 
+2 Database SQL Server dibuat sesuai kebutuhan minimal dan 
+terkoneksi dengan aplikasi. 15% 
+3 Login dan pembagian role Petugas SPPG serta Supervisor SPPG 
+berjalan sederhana. 10% 
+4 Menu Data Pegawai, Data Bahan Baku, dan Data Sekolah Penerima 
+dapat digunakan. 15% 
+5 Petugas SPPG dapat menginput kebutuhan dapur SPPG. 15% 
+6 Petugas SPPG dapat membuat data pesanan ke pemasok. 15% 
+7 Supervisor SPPG dapat melihat dashboard, proses pemesanan, 
+produksi, dan distribusi. 10% 
+8 Laporan sederhana dan profil dapat ditampilkan. 5% 
+9 UI rapi, mudah digunakan, dan terdapat validasi input dasar. 5% 
+Total 100% 
+Tabel 30. Rubrik Penilaian Mobile Hari ke-2 
+No. Aspek Penilaian Bobot 
+1 Project Android dapat dibuka dan dijalankan. 10% 
+2 Login pemasok melalui API berjalan. 15% 
+3 Daftar pesanan tampil dari API. 25% 
+4 Detail pesanan tampil dari API. 20% 
+5 Update status pesanan melalui API berjalan. 15% 
+6 Error handling sederhana tersedia. 5% 
+7 UI mobile rapi dan mudah digunakan. 5% 
+8 Tidak menggunakan dependency yang dilarang. 5% 
+ Total 100% 
+ 
+ 
+--- PAGE 30 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  23 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 8  
+SKENARIO UJI JURI 
+8.1 Skenario Uji  
+Skenario uji merupakan gambaran umum pelaksanaan tugas dan tantangan 
+yang harus diselesaikan oleh peserta selama kompetisi berlangsung. Skenario ini 
+disusun berdasarkan kompetensi yang relevan dengan kebutuhan dunia kerja dan 
+standar industri pada bidang lomba yang diikuti. Melalui skenario uji, peserta 
+dituntut untuk menerapkan pengetahuan, keterampilan teknis, kemampuan analisis, 
+serta pemecahan masalah dalam menyelesaikan tugas secara efektif dan sesuai 
+dengan ketentuan yang telah ditetapkan. Seluruh aktivitas yang dilakukan peserta 
+akan dinilai berdasarkan kualitas hasil kerja, ketepatan prosedur, efisiensi 
+penyelesaian tugas, serta kesesuaian dengan kriteria penilaian yang berlaku. Rincian 
+skenario uji disajikan pada bagian berikut sebagai acuan pelaksanaan kompetisi dan 
+penilaian peserta. 
+Tabel 31. Skenario Uji Desktop Hari ke-1 
+No. Skenario Uji Hasil yang Diharapkan 
+1 Petugas SPPG login ke sistem. Login berhasil dan menu petugas 
+tampil. 
+2 Petugas menambah data pegawai. Data pegawai tersimpan dan tampil di 
+tabel. 
+3 Petugas menambah data bahan 
+baku. 
+Data bahan baku tersimpan ke SQL 
+Server dan tampil di tabel. 
+4 Petugas menambah data sekolah 
+penerima. 
+Data sekolah tersimpan dan tampil di 
+tabel. 
+5 Petugas menginput kebutuhan 
+dapur SPPG. 
+Data kebutuhan dapur tersimpan dan 
+dapat ditampilkan. 
+6 Petugas membuat pesanan ke 
+pemasok. 
+Data pesanan tersimpan dengan status 
+Pending. 
+7 Petugas mengubah status pesanan. Status berubah menjadi Diproses atau 
+Selesai. 
+8 Supervisor SPPG login ke sistem. Login berhasil dan menu monitoring 
+--- PAGE 31 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  24 | Purwakarta, Juni 2026 
+ 
+ 
+No. Skenario Uji Hasil yang Diharapkan 
+tampil. 
+9 Supervisor melihat dashboard. Ringkasan data pemesanan, produksi, 
+dan distribusi tampil. 
+10 Supervisor melihat monitoring 
+produksi dan distribusi. 
+Data proses produksi dan distribusi 
+dapat dilihat. 
+11 Supervisor membuka laporan. Laporan sederhana tampil dalam 
+bentuk tabel. 
+Tabel 32. Skenario Uji Mobile Hari ke-2 
+No. Skenario Uji Hasil yang Diharapkan 
+1 Pemasok login melalui API. Login berhasil. 
+2 Pemasok membuka daftar 
+pesanan. Data pesanan tampil dari API. 
+3 Pemasok membuka detail 
+pesanan. Detail bahan tampil dari API. 
+4 Pemasok mengubah status 
+menjadi Diproses. Status berhasil diperbarui melalui API. 
+5 Pemasok mengubah status 
+menjadi Dikirim. Status berhasil diperbarui melalui API. 
+6 API tidak aktif atau gagal diakses. Aplikasi menampilkan pesan error dan 
+tidak crash. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 32 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  25 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 9  
+FILE YANG HARUS DIKUMPULKAN 
+9.1 Hari ke-1 
+• Source code aplikasi desktop (seluruh project). 
+• File database atau script SQL. 
+• File executable / build jika diminta. 
+• File README singkat berisi cara menjalankan aplikasi dan akun login. 
+9.2 Hari ke-2 
+• Source code aplikasi Android (seluruh project). 
+• File APK jika diminta. 
+• File README singkat berisi base URL API, akun login, dan cara menjalankan 
+aplikasi. 
+9.3 Format Folder yang Direkomendasikan 
+Struktur proyek yang disarankan adalah sebagai berikut: 
+NomorPeserta_NamaPeserta_ITSSFB/ 
+├── Hari1_Desktop/ 
+│   ├── SourceCode/ 
+│   ├── Database/ 
+│   ├── Build/ 
+│   └── README.txt 
+├── Hari2_Mobile/ 
+│   ├── SourceCode/ 
+│   ├── APK/ 
+│   └── README.txt 
+└── Dokumentasi/ 
+    └── Catatan_Pengerjaan.txt 
+Gambar 4. Struktur Folder  
+ 
+ 
+ 
+ 
+ 
+--- PAGE 33 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  26 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 10  
+ATURAN DAN TATA TERTIB 
+Peserta wajib mematuhi seluruh ketentuan berikut: 
+1. Peserta wajib mengerjakan soal secara mandiri. 
+2. Peserta tidak diperkenankan bekerja sama dengan peserta lain. 
+3. Peserta tidak diperkenankan menerima bantuan teknis dari pembimbing atau 
+pihak luar. 
+4. Peserta tidak diperkenankan menggunakan source code siap pakai yang tidak 
+diizinkan. 
+5. Peserta wajib menggunakan teknologi yang telah ditentukan dalam TOR ini. 
+6. Peserta wajib menjaga ketertiban dan kebersihan ruang lomba. 
+7. Peserta wajib mengumpulkan pekerjaan tepat waktu. 
+8. Peserta wajib memastikan aplikasi dapat dijalankan oleh juri. 
+9. Keputusan juri bersifat final setelah proses rekapitulasi dan verifikasi. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 34 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  27 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 11  
+SANKSI PELANGGARAN 
+Pelanggaran terhadap tata tertib dapat dikenakan sanksi berupa: 
+Tabel 33. Pelanggaran dan Sanksi 
+No. Tingkat Pelanggaran Sanksi 
+1 Ringan Teguran lisan dari juri atau panitia. 
+2 Sedang Pengurangan nilai pada modul terkait. 
+3 Berat Pembatalan nilai pada satu atau seluruh 
+modul. 
+4 Sangat Berat Diskualifikasi dari lomba. 
+Jenis sanksi ditentukan oleh juri dan panitia berdasarkan jenis pelanggaran, dampak 
+pelanggaran, dan bukti yang tersedia. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 35 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  28 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 12  
+INDIKATOR KEBERHASILAN 
+Peserta dinyatakan berhasil secara teknis apabila: 
+1. Aplikasi desktop dapat dijalankan. 
+2. Database SQL Server dapat digunakan. 
+3. Login dan role Petugas SPPG serta Supervisor SPPG berjalan. 
+4. Data pegawai dapat dikelola. 
+5. Data bahan baku dapat dikelola. 
+6. Data sekolah penerima dapat dikelola. 
+7. Kebutuhan dapur SPPG dapat diinput. 
+8. Pesanan ke pemasok dapat dibuat. 
+9. Supervisor dapat melihat dashboard, produksi, distribusi, dan laporan. 
+10. Aplikasi mobile dapat dijalankan. 
+11. Aplikasi mobile dapat login ke API. 
+12. Aplikasi mobile dapat menampilkan daftar dan detail pesanan. 
+13. Aplikasi mobile dapat mengubah status pesanan. 
+14. Aplikasi tidak crash saat diuji oleh juri. 
+15. Hasil pekerjaan dikumpulkan sesuai waktu dan format yang ditentukan. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 36 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  29 | Purwakarta, Juni 2026 
+ 
+ 
+BAB 13  
+BERITA ACARA KEGIATAN 
+Setelah seluruh proses lomba selesai, panitia dan juri menyusun berita acara 
+kegiatan. Berita acara memuat: 
+1. Nama kegiatan. 
+2. Waktu dan tempat pelaksanaan. 
+3. Daftar peserta. 
+4. Daftar juri. 
+5. Ringkasan pelaksanaan hari pertama dan hari kedua. 
+6. Rekapitulasi nilai. 
+7. Penetapan peringkat. 
+8. Catatan kendala teknis jika ada. 
+9. Tanda tangan juri dan panitia. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 37 ---
+TOR TEKNIS — LKS SMK Jabar 2026 IT Software Solution for Business | Smart Meal Distribution System 
+Dokumen Resmi Juri & Panitia — Bersifat Rahasia  30 | Purwakarta, Juni 2026 
+ 
+ 
+ 
+BAB 14  
+PENUTUP 
+TOR Teknis ini disusun sebagai acuan pelaksanaan LKS SMK Tingkat Provinsi 
+Jawa Barat 2026 kategori IT Software Solution for Business dengan tema Smart Meal 
+Distribution System. Cakupan soal telah disesuaikan dengan level peserta SMK dan 
+durasi pengerjaan efektif sekitar 4,5 jam per hari. 
+Pada hari pertama, peserta difokuskan pada pengembangan aplikasi full 
+desktop berbasis C# dan SQL Server yang digunakan oleh Petugas SPPG dan 
+Supervisor SPPG untuk mengelola seluruh data operasional. 
+Pada hari kedua, peserta difokuskan pada pengembangan aplikasi mobile 
+Android yang menggunakan API web yang disediakan oleh juri. Peserta tidak 
+membuat API, tetapi wajib mampu membaca dokumentasi API, memahami 
+endpoint, melakukan request, membaca JSON response, menampilkan data, dan 
+mengubah status pesanan. 
+Dengan TOR ini, diharapkan peserta, pembimbing, panitia, dan juri memiliki 
+pemahaman yang sama mengenai ruang lingkup, batasan, jadwal, teknologi, 
+penilaian, serta indikator keberhasilan lomba. 
+ 
