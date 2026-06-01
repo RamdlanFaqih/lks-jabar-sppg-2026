@@ -1,10 +1,46 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Home() {
+  const router = useRouter();
   const [activeDayTab, setActiveDayTab] = useState<"day1" | "day2">("day1");
+
+  const handleStepClick = (step: any) => {
+    if (step.href === "/docs" || step.href === "/health") {
+      router.push(step.href);
+      return;
+    }
+
+    if (step.href.startsWith("/desktop")) {
+      const userStr = localStorage.getItem("currentUser");
+      const user = userStr ? JSON.parse(userStr) : null;
+      const reqRoleDB = step.role === "Petugas" ? "PetugasSPPG" : "SupervisorSPPG";
+
+      if (!user) {
+        router.push(`/desktop/login?redirect=${encodeURIComponent(step.href)}&role=${step.role}`);
+      } else {
+        if (user.role !== reqRoleDB) {
+          alert(`Langkah ini memerlukan role ${step.role === "Petugas" ? "Petugas SPPG" : "Supervisor SPPG"}. Sesi Anda saat ini sebagai ${user.role === "PetugasSPPG" ? "Petugas" : "Supervisor"} akan dialihkan ke halaman login.`);
+          localStorage.removeItem("currentUser");
+          router.push(`/desktop/login?redirect=${encodeURIComponent(step.href)}&role=${step.role}`);
+        } else {
+          router.push(step.href);
+        }
+      }
+    } else if (step.href.startsWith("/mobile") || step.href === "/mobile") {
+      const userStr = localStorage.getItem("currentMobileUser");
+      const user = userStr ? JSON.parse(userStr) : null;
+
+      if (!user) {
+        router.push(`/mobile/login?redirect=${encodeURIComponent(step.href)}`);
+      } else {
+        router.push(step.href);
+      }
+    }
+  };
 
   const day1Steps = [
     {
@@ -363,13 +399,13 @@ export default function Home() {
                 </div>
 
                 <div className="pt-1.5 border-t border-slate-100">
-                  <Link
-                    href={step.href}
-                    className="inline-flex items-center space-x-1 text-xs font-bold text-indigo-600 hover:text-indigo-800 transition"
+                  <button
+                    onClick={() => handleStepClick(step)}
+                    className="inline-flex items-center space-x-1 text-xs font-bold text-indigo-600 hover:text-indigo-800 transition bg-transparent border-0 cursor-pointer p-0 font-sans outline-none"
                   >
                     <span>{step.linkText}</span>
                     <span>&rarr;</span>
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}

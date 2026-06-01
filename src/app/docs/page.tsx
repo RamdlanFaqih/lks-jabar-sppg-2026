@@ -653,28 +653,11 @@ const endpoints: Endpoint[] = [
 export default function DocsPage() {
   const [activeEndpoint, setActiveEndpoint] = useState<Endpoint>(endpoints[0]);
   const [snippetLang, setSnippetLang] = useState<"curl" | "js" | "python">("curl");
-  const [activeTab, setActiveTab] = useState<"docs" | "try">("docs");
 
   // Filters State
   const [selectedRoleFilter, setSelectedRoleFilter] = useState<string>("All");
   const [selectedModeFilter, setSelectedModeFilter] = useState<string>("Mobile");
   const [searchQuery, setSearchQuery] = useState<string>("");
-
-  // Dynamic Playground input states
-  const [playgroundInputs, setPlaygroundInputs] = useState<Record<string, string>>({});
-
-  const [loading, setLoading] = useState<boolean>(false);
-  const [responseStatus, setResponseStatus] = useState<number | null>(null);
-  const [responseBody, setResponseBody] = useState<string>("");
-
-  // Sync inputs with selected endpoint defaults
-  useEffect(() => {
-    const defaults: Record<string, string> = {};
-    activeEndpoint.parameters?.forEach((p) => {
-      defaults[p.name] = p.defaultValue || "";
-    });
-    setPlaygroundInputs(defaults);
-  }, [activeEndpoint]);
 
   // Filter endpoints
   const filteredEndpoints = endpoints.filter((ep) => {
@@ -701,97 +684,6 @@ export default function DocsPage() {
   });
   const categoriesList = Object.keys(categoriesMap) as Endpoint["category"][];
 
-  const handleSendRequest = async () => {
-    setLoading(true);
-    setResponseStatus(null);
-    setResponseBody("");
-
-    // 1. Construct Path Params
-    let requestUrl = activeEndpoint.path;
-    let missingPathParam = false;
-    activeEndpoint.parameters?.forEach((p) => {
-      if (p.location === "path") {
-        const val = playgroundInputs[p.name];
-        if (!val) {
-          missingPathParam = true;
-        } else {
-          requestUrl = requestUrl.replace(`[${p.name}]`, encodeURIComponent(val));
-        }
-      }
-    });
-
-    if (missingPathParam) {
-      setResponseStatus(451);
-      setResponseBody(JSON.stringify({ error: "Client Error", message: "Please provide all required path parameters." }, null, 2));
-      setLoading(false);
-      return;
-    }
-
-    // 2. Construct Query Params
-    const queryParams = new URLSearchParams();
-    activeEndpoint.parameters?.forEach((p) => {
-      if (p.location === "query") {
-        const val = playgroundInputs[p.name];
-        if (val) {
-          queryParams.append(p.name, val);
-        }
-      }
-    });
-    const queryString = queryParams.toString();
-    if (queryString) {
-      requestUrl += `?${queryString}`;
-    }
-
-    // 3. Construct Request Body
-    const bodyData: Record<string, any> = {};
-    activeEndpoint.parameters?.forEach((p) => {
-      if (p.location === "body") {
-        const val = playgroundInputs[p.name];
-        if (val !== undefined && val !== "") {
-          if (p.type.includes("number") || p.type.includes("integer")) {
-            bodyData[p.name] = Number(val);
-          } else {
-            bodyData[p.name] = val;
-          }
-        }
-      }
-    });
-
-    try {
-      const options: RequestInit = {
-        method: activeEndpoint.method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-      if (["POST", "PUT", "PATCH"].includes(activeEndpoint.method) && Object.keys(bodyData).length > 0) {
-        options.body = JSON.stringify(bodyData);
-      }
-
-      const res = await fetch(requestUrl, options);
-      const text = await res.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (err) {
-        data = text;
-      }
-
-      setResponseStatus(res.status);
-      setResponseBody(
-        typeof data === "object"
-          ? JSON.stringify(data, null, 2)
-          : data
-      );
-    } catch (err: any) {
-      setResponseStatus(500);
-      setResponseBody(JSON.stringify({ error: "Fetch Failure", message: err.message }, null, 2));
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const getMethodBadgeClass = (method: string) => {
     switch (method) {
       case "GET":
@@ -816,7 +708,7 @@ export default function DocsPage() {
     let path = endpoint.path;
     endpoint.parameters?.forEach((p) => {
       if (p.location === "path") {
-        path = path.replace(`[${p.name}]`, playgroundInputs[p.name] || p.defaultValue || "1");
+        path = path.replace(`[${p.name}]`, p.defaultValue || "1");
       }
     });
 
@@ -824,7 +716,7 @@ export default function DocsPage() {
     const queryParams = new URLSearchParams();
     endpoint.parameters?.forEach((p) => {
       if (p.location === "query") {
-        const val = playgroundInputs[p.name] !== undefined ? playgroundInputs[p.name] : p.defaultValue;
+        const val = p.defaultValue;
         if (val) {
           queryParams.append(p.name, val);
         }
@@ -837,7 +729,7 @@ export default function DocsPage() {
     const bodyData: Record<string, any> = {};
     endpoint.parameters?.forEach((p) => {
       if (p.location === "body") {
-        const val = playgroundInputs[p.name] !== undefined ? playgroundInputs[p.name] : p.defaultValue;
+        const val = p.defaultValue;
         if (val !== undefined && val !== "") {
           if (p.type.includes("number") || p.type.includes("integer")) {
             bodyData[p.name] = Number(val);
@@ -971,8 +863,6 @@ export default function DocsPage() {
                           key={ep.id}
                           onClick={() => {
                             setActiveEndpoint(ep);
-                            setResponseStatus(null);
-                            setResponseBody("");
                           }}
                           className={`w-full text-left px-2 py-2 rounded-lg text-xs font-medium transition-all duration-150 flex items-center space-x-2 border ${
                             isActive
@@ -1071,383 +961,161 @@ export default function DocsPage() {
               </p>
             </div>
 
-            {/* Toggle tabs */}
-            <div className="border-b border-slate-200 flex space-x-6">
-              <button
-                onClick={() => setActiveTab("docs")}
-                className={`pb-3 text-sm font-semibold border-b-2 transition-all duration-200 ${
-                  activeTab === "docs"
-                    ? "border-slate-800 text-slate-950 font-bold"
-                    : "border-transparent text-slate-400 hover:text-slate-700"
-                }`}
-              >
-                API Documentation
-              </button>
-              <button
-                onClick={() => setActiveTab("try")}
-                className={`pb-3 text-sm font-semibold border-b-2 transition-all duration-200 ${
-                  activeTab === "try"
-                    ? "border-slate-800 text-slate-950 font-bold"
-                    : "border-transparent text-slate-400 hover:text-slate-700"
-                }`}
-              >
-                Try It Out (Interactive Client)
-              </button>
-            </div>
+            <div className="space-y-8">
+              {/* Parameters section */}
+              {activeEndpoint.parameters && activeEndpoint.parameters.length > 0 ? (
+                <div className="space-y-6">
+                  <h3 className="text-base font-bold text-slate-950 tracking-tight font-sans">Request Parameters</h3>
 
-            {activeTab === "docs" ? (
-              <div className="space-y-8 animate-fadeIn">
-                {/* Parameters section */}
-                {activeEndpoint.parameters && activeEndpoint.parameters.length > 0 ? (
-                  <div className="space-y-6">
-                    <h3 className="text-base font-bold text-slate-950 tracking-tight font-sans">Request Parameters</h3>
-
-                    {/* Path parameters */}
-                    {activeEndpoint.parameters.some(p => p.location === "path") && (
-                      <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded border border-indigo-200">Path Parameters</span>
-                        </div>
-                        <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/50 shadow-sm">
-                          <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-                            <thead className="bg-slate-100 font-semibold text-slate-700">
-                              <tr>
-                                <th className="px-4 py-3">Parameter</th>
-                                <th className="px-4 py-3">Type</th>
-                                <th className="px-4 py-3">Required</th>
-                                <th className="px-4 py-3">Description</th>
+                  {/* Path parameters */}
+                  {activeEndpoint.parameters.some(p => p.location === "path") && (
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded border border-indigo-200">Path Parameters</span>
+                      </div>
+                      <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/50 shadow-sm">
+                        <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                          <thead className="bg-slate-100 font-semibold text-slate-700">
+                            <tr>
+                              <th className="px-4 py-3">Parameter</th>
+                              <th className="px-4 py-3">Type</th>
+                              <th className="px-4 py-3">Required</th>
+                              <th className="px-4 py-3">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-200 text-slate-600">
+                            {activeEndpoint.parameters.filter(p => p.location === "path").map((param) => (
+                              <tr key={param.name} className="hover:bg-slate-50/50">
+                                <td className="px-4 py-3 font-mono text-indigo-850 font-bold">{param.name}</td>
+                                <td className="px-4 py-3 font-mono text-xs">{param.type}</td>
+                                <td className="px-4 py-3 text-xs">
+                                  <span className="text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200/50 font-semibold text-[10px]">required</span>
+                                </td>
+                                <td className="px-4 py-3">{param.description}</td>
                               </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-200 text-slate-600">
-                              {activeEndpoint.parameters.filter(p => p.location === "path").map((param) => (
-                                <tr key={param.name} className="hover:bg-slate-50/50">
-                                  <td className="px-4 py-3 font-mono text-indigo-850 font-bold">{param.name}</td>
-                                  <td className="px-4 py-3 font-mono text-xs">{param.type}</td>
-                                  <td className="px-4 py-3 text-xs">
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Query parameters */}
+                  {activeEndpoint.parameters.some(p => p.location === "query") && (
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">Query Parameters</span>
+                      </div>
+                      <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/50 shadow-sm">
+                        <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                          <thead className="bg-slate-100 font-semibold text-slate-700">
+                            <tr>
+                              <th className="px-4 py-3">Parameter</th>
+                              <th className="px-4 py-3">Type</th>
+                              <th className="px-4 py-3">Required</th>
+                              <th className="px-4 py-3">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-200 text-slate-600">
+                            {activeEndpoint.parameters.filter(p => p.location === "query").map((param) => (
+                              <tr key={param.name} className="hover:bg-slate-50/50">
+                                <td className="px-4 py-3 font-mono text-emerald-850 font-bold">{param.name}</td>
+                                <td className="px-4 py-3 font-mono text-xs">{param.type}</td>
+                                <td className="px-4 py-3 text-xs">
+                                  {param.required ? (
                                     <span className="text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200/50 font-semibold text-[10px]">required</span>
-                                  </td>
-                                  <td className="px-4 py-3">{param.description}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Query parameters */}
-                    {activeEndpoint.parameters.some(p => p.location === "query") && (
-                      <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">Query Parameters</span>
-                        </div>
-                        <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/50 shadow-sm">
-                          <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-                            <thead className="bg-slate-100 font-semibold text-slate-700">
-                              <tr>
-                                <th className="px-4 py-3">Parameter</th>
-                                <th className="px-4 py-3">Type</th>
-                                <th className="px-4 py-3">Required</th>
-                                <th className="px-4 py-3">Description</th>
+                                  ) : (
+                                    <span className="text-slate-400 bg-slate-100 px-2 py-0.5 rounded border border-slate-200/50 text-[10px]">optional</span>
+                                  )}
+                                </td>
+                                <td className="px-4 py-3">{param.description}</td>
                               </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-200 text-slate-600">
-                              {activeEndpoint.parameters.filter(p => p.location === "query").map((param) => (
-                                <tr key={param.name} className="hover:bg-slate-50/50">
-                                  <td className="px-4 py-3 font-mono text-emerald-850 font-bold">{param.name}</td>
-                                  <td className="px-4 py-3 font-mono text-xs">{param.type}</td>
-                                  <td className="px-4 py-3 text-xs">
-                                    {param.required ? (
-                                      <span className="text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200/50 font-semibold text-[10px]">required</span>
-                                    ) : (
-                                      <span className="text-slate-400 bg-slate-100 px-2 py-0.5 rounded border border-slate-200/50 text-[10px]">optional</span>
-                                    )}
-                                  </td>
-                                  <td className="px-4 py-3">{param.description}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
-                    )}
+                    </div>
+                  )}
 
-                    {/* Request Body parameters */}
-                    {activeEndpoint.parameters.some(p => p.location === "body") && (
-                      <div className="space-y-2">
-                        <div className="flex items-center space-x-2">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-sky-50 text-sky-700 px-2 py-0.5 rounded border border-sky-200">Request Body</span>
-                        </div>
-                        <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/50 shadow-sm">
-                          <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-                            <thead className="bg-slate-100 font-semibold text-slate-700">
-                              <tr>
-                                <th className="px-4 py-3">Field</th>
-                                <th className="px-4 py-3">Type</th>
-                                <th className="px-4 py-3">Required</th>
-                                <th className="px-4 py-3">Description</th>
+                  {/* Request Body parameters */}
+                  {activeEndpoint.parameters.some(p => p.location === "body") && (
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-[10px] font-bold uppercase tracking-wider bg-sky-50 text-sky-700 px-2 py-0.5 rounded border border-sky-200">Request Body</span>
+                      </div>
+                      <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50/50 shadow-sm">
+                        <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                          <thead className="bg-slate-100 font-semibold text-slate-700">
+                            <tr>
+                              <th className="px-4 py-3">Field</th>
+                              <th className="px-4 py-3">Type</th>
+                              <th className="px-4 py-3">Required</th>
+                              <th className="px-4 py-3">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-200 text-slate-600">
+                            {activeEndpoint.parameters.filter(p => p.location === "body").map((param) => (
+                              <tr key={param.name} className="hover:bg-slate-50/50">
+                                <td className="px-4 py-3 font-mono text-sky-850 font-bold">{param.name}</td>
+                                <td className="px-4 py-3 font-mono text-xs">{param.type}</td>
+                                <td className="px-4 py-3 text-xs">
+                                  {param.required ? (
+                                    <span className="text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200/50 font-semibold text-[10px]">required</span>
+                                  ) : (
+                                    <span className="text-slate-400 bg-slate-100 px-2 py-0.5 rounded border border-slate-200/50 text-[10px]">optional</span>
+                                  )}
+                                </td>
+                                <td className="px-4 py-3">{param.description}</td>
                               </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-200 text-slate-600">
-                              {activeEndpoint.parameters.filter(p => p.location === "body").map((param) => (
-                                <tr key={param.name} className="hover:bg-slate-50/50">
-                                  <td className="px-4 py-3 font-mono text-sky-850 font-bold">{param.name}</td>
-                                  <td className="px-4 py-3 font-mono text-xs">{param.type}</td>
-                                  <td className="px-4 py-3 text-xs">
-                                    {param.required ? (
-                                      <span className="text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200/50 font-semibold text-[10px]">required</span>
-                                    ) : (
-                                      <span className="text-slate-400 bg-slate-100 px-2 py-0.5 rounded border border-slate-200/50 text-[10px]">optional</span>
-                                    )}
-                                  </td>
-                                  <td className="px-4 py-3">{param.description}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
+                            ))}
+                          </tbody>
+                        </table>
                       </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className="space-y-2">
-                    <h3 className="text-base font-bold text-slate-950 tracking-tight font-sans">Request Parameters</h3>
-                    <p className="text-sm text-slate-450 italic">No parameters required for this endpoint.</p>
-                  </div>
-                )}
-
-                {/* Responses */}
-                <div className="space-y-4">
-                  <h3 className="text-base font-bold text-slate-950 tracking-tight font-sans">Expected Responses</h3>
-                  <div className="space-y-4">
-                    {activeEndpoint.responses.map((resp) => (
-                      <div
-                        key={resp.status}
-                        className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50 shadow-sm"
-                      >
-                        <div className="flex items-center justify-between px-4 py-3 bg-slate-100/80 border-b border-slate-200">
-                          <div className="flex items-center space-x-2.5">
-                            <span
-                              className={`text-xs font-bold font-mono px-2 py-0.5 rounded border ${
-                                resp.status >= 200 && resp.status < 300
-                                  ? "bg-emerald-50 text-emerald-700 border-emerald-200/50"
-                                  : "bg-rose-50 text-rose-700 border-rose-200/50"
-                              }`}
-                            >
-                              {resp.status}
-                            </span>
-                            <span className="text-xs text-slate-600 font-semibold">
-                              {resp.description}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="p-4 overflow-x-auto bg-white">
-                          <pre className="text-xs font-mono text-slate-700 leading-relaxed">
-                            {resp.body}
-                          </pre>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ) : (
-              /* Playground */
-              <div className="space-y-6 animate-fadeIn">
-                <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-5 shadow-sm">
-                  <h3 className="text-sm font-bold text-slate-900">Configure Request Payload</h3>
+              ) : (
+                <div className="space-y-2">
+                  <h3 className="text-base font-bold text-slate-950 tracking-tight font-sans">Request Parameters</h3>
+                  <p className="text-sm text-slate-450 italic">No parameters required for this endpoint.</p>
+                </div>
+              )}
 
-                  {/* Path parameters inputs */}
-                  {activeEndpoint.parameters && activeEndpoint.parameters.some(p => p.location === "path") && (
-                    <div className="space-y-3 pt-1">
-                      <h4 className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider border-b border-indigo-100 pb-1">Path Parameters</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {activeEndpoint.parameters.filter(p => p.location === "path").map((p) => (
-                          <div key={p.name} className="space-y-1">
-                            <label className="block text-xs font-semibold text-slate-550">
-                              {p.name} <span className="text-rose-500">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              value={playgroundInputs[p.name] || ""}
-                              onChange={(e) => setPlaygroundInputs(prev => ({ ...prev, [p.name]: e.target.value }))}
-                              placeholder={p.defaultValue || "e.g. 1"}
-                              className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-200 transition duration-150 text-slate-800"
-                            />
-                          </div>
-                        ))}
+              {/* Responses */}
+              <div className="space-y-4">
+                <h3 className="text-base font-bold text-slate-950 tracking-tight font-sans">Expected Responses</h3>
+                <div className="space-y-4">
+                  {activeEndpoint.responses.map((resp) => (
+                    <div
+                      key={resp.status}
+                      className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50 shadow-sm"
+                    >
+                      <div className="flex items-center justify-between px-4 py-3 bg-slate-100/80 border-b border-slate-200">
+                        <div className="flex items-center space-x-2.5">
+                          <span
+                            className={`text-xs font-bold font-mono px-2 py-0.5 rounded border ${
+                              resp.status >= 200 && resp.status < 300
+                                ? "bg-emerald-50 text-emerald-700 border-emerald-200/50"
+                                : "bg-rose-50 text-rose-700 border-rose-200/50"
+                            }`}
+                          >
+                            {resp.status}
+                          </span>
+                          <span className="text-xs text-slate-600 font-semibold">
+                            {resp.description}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  )}
-
-                  {/* Query parameters inputs */}
-                  {activeEndpoint.parameters && activeEndpoint.parameters.some(p => p.location === "query") && (
-                    <div className="space-y-3 pt-1">
-                      <h4 className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider border-b border-emerald-100 pb-1">Query Parameters</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {activeEndpoint.parameters.filter(p => p.location === "query").map((p) => (
-                          <div key={p.name} className="space-y-1">
-                            <label className="block text-xs font-semibold text-slate-550">
-                              {p.name} {p.required && <span className="text-rose-500">*</span>}
-                            </label>
-                            <input
-                              type="text"
-                              value={playgroundInputs[p.name] || ""}
-                              onChange={(e) => setPlaygroundInputs(prev => ({ ...prev, [p.name]: e.target.value }))}
-                              placeholder={p.defaultValue || "value..."}
-                              className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-200 transition duration-150 text-slate-800"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Body fields inputs */}
-                  {activeEndpoint.parameters && activeEndpoint.parameters.some(p => p.location === "body") && (
-                    <div className="space-y-4 pt-1">
-                      <h4 className="text-[10px] font-bold text-sky-700 uppercase tracking-wider border-b border-sky-100 pb-1">Request Body Fields</h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {activeEndpoint.parameters.filter(p => p.location === "body").map((p) => (
-                          <div key={p.name} className="space-y-1">
-                            <label className="block text-xs font-semibold text-slate-550">
-                              {p.name} {p.required && <span className="text-rose-500">*</span>}
-                            </label>
-
-                            {/* Dropdowns for status fields */}
-                            {p.name === "status" ? (
-                              <select
-                                value={playgroundInputs[p.name] || ""}
-                                onChange={(e) => setPlaygroundInputs(prev => ({ ...prev, [p.name]: e.target.value }))}
-                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none text-slate-800"
-                              >
-                                <option value="Pending">Pending</option>
-                                <option value="Diproses">Diproses</option>
-                                <option value="Dikirim">Dikirim</option>
-                                <option value="Selesai">Selesai</option>
-                              </select>
-                            ) : p.name === "productionStatus" ? (
-                              <select
-                                value={playgroundInputs[p.name] || ""}
-                                onChange={(e) => setPlaygroundInputs(prev => ({ ...prev, [p.name]: e.target.value }))}
-                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none text-slate-800"
-                              >
-                                <option value="Belum Diproses">Belum Diproses</option>
-                                <option value="Diproses">Diproses</option>
-                                <option value="Selesai">Selesai</option>
-                              </select>
-                            ) : p.name === "distributionStatus" ? (
-                              <select
-                                value={playgroundInputs[p.name] || ""}
-                                onChange={(e) => setPlaygroundInputs(prev => ({ ...prev, [p.name]: e.target.value }))}
-                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none text-slate-800"
-                              >
-                                <option value="Belum Dikirim">Belum Dikirim</option>
-                                <option value="Dikirim">Dikirim</option>
-                                <option value="Selesai">Selesai</option>
-                              </select>
-                            ) : (
-                              <input
-                                type="text"
-                                value={playgroundInputs[p.name] || ""}
-                                onChange={(e) => setPlaygroundInputs(prev => ({ ...prev, [p.name]: e.target.value }))}
-                                placeholder={p.defaultValue || "value..."}
-                                className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-slate-400 focus:ring-1 focus:ring-slate-200 transition duration-150 text-slate-800"
-                              />
-                            )}
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Live payload serialization preview */}
-                      <div className="space-y-1.5">
-                        <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Generated Payload JSON</span>
-                        <pre className="p-3 bg-white rounded-lg text-xs font-mono text-slate-650 overflow-x-auto max-h-[140px] border border-slate-200">
-                          {JSON.stringify(
-                            (() => {
-                              const bodyData: Record<string, any> = {};
-                              activeEndpoint.parameters?.filter(p => p.location === "body").forEach(p => {
-                                const val = playgroundInputs[p.name];
-                                if (val !== undefined && val !== "") {
-                                  if (p.type.includes("number") || p.type.includes("integer")) {
-                                    bodyData[p.name] = Number(val);
-                                  } else {
-                                    bodyData[p.name] = val;
-                                  }
-                                }
-                              });
-                              return bodyData;
-                            })(),
-                            null,
-                            2
-                          )}
+                      <div className="p-4 overflow-x-auto bg-white">
+                        <pre className="text-xs font-mono text-slate-700 leading-relaxed">
+                          {resp.body}
                         </pre>
                       </div>
                     </div>
-                  )}
-
-                  <button
-                    onClick={handleSendRequest}
-                    disabled={loading}
-                    className="w-full py-2.5 rounded-lg font-semibold bg-slate-850 hover:bg-slate-900 text-white hover:shadow transition-all duration-150 flex items-center justify-center space-x-2 text-sm cursor-pointer disabled:opacity-50"
-                  >
-                    {loading ? (
-                      <>
-                        <svg
-                          className="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          />
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          />
-                        </svg>
-                        <span>Executing Live Call...</span>
-                      </>
-                    ) : (
-                      <span>Send API Request</span>
-                    )}
-                  </button>
+                  ))}
                 </div>
-
-                {/* API live response */}
-                {(responseStatus !== null || responseBody) && (
-                  <div className="border border-slate-200 rounded-xl overflow-hidden bg-slate-50 shadow-sm animate-fadeIn">
-                    <div className="flex items-center justify-between px-5 py-3 bg-slate-100/80 border-b border-slate-200">
-                      <h4 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-                        Server Response
-                      </h4>
-                      {responseStatus !== null && (
-                        <span
-                          className={`text-xs font-mono font-bold px-2 py-0.5 rounded border ${
-                            responseStatus >= 200 && responseStatus < 300
-                              ? "bg-emerald-50 text-emerald-700 border-emerald-200/50"
-                              : "bg-rose-50 text-rose-700 border-rose-200/50"
-                          }`}
-                        >
-                          HTTP {responseStatus}
-                        </span>
-                      )}
-                    </div>
-                    <div className="p-5 overflow-x-auto max-h-[350px] bg-white">
-                      <pre className="text-xs font-mono text-slate-800 leading-relaxed">
-                        {responseBody}
-                      </pre>
-                    </div>
-                  </div>
-                )}
               </div>
-            )}
+            </div>
           </div>
 
           {/* Right Console: Code Snippets Code block */}

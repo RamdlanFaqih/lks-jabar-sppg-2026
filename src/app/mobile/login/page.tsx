@@ -1,17 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useToast } from "../layout";
 
-export default function MobileLoginPage() {
+function MobileLoginForm() {
   const [loginUsername, setLoginUsername] = useState("pemasok1");
   const [loginPassword, setLoginPassword] = useState("password123");
   const [loginError, setLoginError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { showToast } = useToast();
+
+  const redirectUrl = searchParams.get("redirect") || "/mobile";
 
   const handleMobileLogin = async (e: React.FormEvent, customCreds?: { u: string; p: string }) => {
     if (e) e.preventDefault();
@@ -41,7 +44,7 @@ export default function MobileLoginPage() {
         if (userRole === "Pemasok") {
           localStorage.setItem("currentMobileUser", JSON.stringify(data.user));
           showToast("success", `Response 200 OK: Autentikasi berhasil.`);
-          router.push("/mobile");
+          router.push(redirectUrl);
         } else {
           setLoginError("Akses Ditolak. Hanya role Pemasok yang dapat menggunakan aplikasi mobile ini.");
           showToast("error", "Akses Ditolak: Role bukan Pemasok.");
@@ -122,5 +125,18 @@ export default function MobileLoginPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+export default function MobileLoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-full flex flex-col justify-center items-center py-20">
+        <div className="animate-spin h-5 w-5 mx-auto text-slate-450 border-2 border-slate-200 border-t-slate-500 rounded-full" />
+        <p className="text-[10px] mt-2 text-slate-400 font-mono text-center">Memuat form login...</p>
+      </div>
+    }>
+      <MobileLoginForm />
+    </Suspense>
   );
 }
