@@ -164,6 +164,51 @@ CREATE TABLE ProductionDistribution (
     FOREIGN KEY (SchoolId) REFERENCES Schools(SchoolId) ON DELETE CASCADE
 );
 GO
+
+-- 9. Seed Mock Data (Optional, for testing)
+-- Seed Users
+INSERT INTO Users (Username, Password, FullName, Role, Position) VALUES
+('petugas', 'password123', 'Andi Saputra', 'PetugasSPPG', 'Staf Dapur'),
+('supervisor', 'password123', 'Budi Santoso', 'SupervisorSPPG', 'Kepala Pelayanan'),
+('pemasok1', 'password123', 'CV Pangan Sejahtera', 'Pemasok', 'Distributor Utama');
+
+-- Seed Employees
+INSERT INTO Employees (EmployeeName, Position, Phone, Address) VALUES
+('Andi Saputra', 'Staf Dapur', '08123456789', 'Jl. Dahlia No. 5, Purwakarta'),
+('Siti Aminah', 'Koki Utama', '08776543210', 'Jl. Mawar No. 12, Purwakarta'),
+('Rahmat Hidayat', 'Kurir Distribusi', '08998877665', 'Jl. Melati No. 8, Purwakarta');
+
+-- Seed RawMaterials
+INSERT INTO RawMaterials (MaterialName, Category, Unit, Stock, EstimatedPrice) VALUES
+('Beras Cianjur', 'Karbohidrat', 'kg', 500.00, 14000.00),
+('Telur Ayam', 'Protein', 'butir', 1000.00, 2000.00),
+('Daging Ayam Fillet', 'Protein', 'kg', 200.00, 35000.00),
+('Minyak Goreng Bimoli', 'Minyak', 'liter', 150.00, 18000.00),
+('Wortel Segar', 'Sayur', 'kg', 100.00, 12000.00);
+
+-- Seed Schools
+INSERT INTO Schools (SchoolName, Address, PICName, PICPhone, StudentCount) VALUES
+('SDN 1 Purwakarta', 'Jl. Veteran No. 12, Purwakarta', 'Pak Joko', '08123456789', 320),
+('SDN 2 Purwakarta', 'Jl. Sudirman No. 45, Purwakarta', 'Ibu Sri', '08776543210', 240),
+('SMPN 1 Purwakarta', 'Jl. Cipaisan No. 2, Purwakarta', 'Pak Heru', '08998877665', 450);
+
+-- Seed KitchenNeeds (Assumes MaterialId 1, 2, 5 match Beras, Telur, Wortel)
+INSERT INTO KitchenNeeds (NeedDate, MaterialId, Quantity, Unit, Notes) VALUES
+(CAST(GETDATE() AS DATE), 1, 50.00, 'kg', 'Menu nasi tim siang'),
+(CAST(GETDATE() AS DATE), 2, 320.00, 'butir', 'Lauk telur dadar SDN 1'),
+(CAST(GETDATE() AS DATE), 5, 15.00, 'kg', 'Wortel untuk sayur sop');
+
+-- Seed SupplierOrders (Only 1 Pending supplier order, matches our updated seeder!)
+INSERT INTO SupplierOrders (OrderDate, SupplierName, MaterialId, OrderQuantity, Unit, Status, Notes) VALUES
+(CAST(GETDATE() AS DATE), 'CV Pangan Sejahtera', 1, 200.00, 'kg', 'Pending', 'Tambahan stok beras cianjur');
+
+-- Seed ProductionDistribution (Assumes SchoolId 1, 2, 3 match SDN 1, SDN 2, SMPN 1)
+INSERT INTO ProductionDistribution (ProcessDate, SchoolId, PortionCount, ProductionStatus, DistributionStatus, Notes) VALUES
+(CAST(GETDATE() AS DATE), 1, 320, 'Selesai', 'Selesai', 'Terkirim lengkap'),
+(CAST(GETDATE() AS DATE), 2, 240, 'Selesai', 'Dikirim', 'Sedang diantarkan kurir Rahmat'),
+(CAST(GETDATE() AS DATE), 3, 450, 'Diproses', 'Belum Dikirim', 'Proses memasak koki Siti');
+GO
+```
 ```
 
 ---
