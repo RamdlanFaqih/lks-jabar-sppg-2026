@@ -1,17 +1,218 @@
-# 📘 SQL CRUD Guide (LKS SMK Jabar 2026 - ITSSFB)
+# 📘 Database Schema & SQL CRUD Guide (LKS SMK Jabar 2026 - ITSSFB)
 
-Dokumen ini berisi panduan lengkap **SQL Statement (ANSI SQL)** untuk seluruh operasi **CRUD (Create, Read, Update, Delete)** dan query **Laporan** sesuai dengan kebutuhan modul Desktop pada **Smart Meal Distribution System** (LKS SMK Jawa Barat 2026).
-
-Semua query di bawah menggunakan sintaks **SQL standar (ANSI SQL)** yang global dan kompatibel dengan berbagai RDBMS seperti **SQL Server, PostgreSQL, MySQL, SQLite, dsb.**
+Dokumen ini berisi spesifikasi **Rancangan Database Schema** dan **SQL Statement Guide (ANSI SQL)** untuk seluruh operasi **DDL, DML, CRUD,** serta query **Laporan** sesuai dengan modul Desktop pada **Smart Meal Distribution System** (LKS SMK Jawa Barat 2026).
 
 ---
 
-## 🔑 1. Modul Autentikasi (Users)
+## 📂 1. Database Schema Design (MS SQL Server / Windows)
 
-Tabel `Users` menyimpan data kredensial login pengguna dengan role `PetugasSPPG` atau `SupervisorSPPG` (dan `Pemasok`).
+Sistem ini membutuhkan basis data relasional yang terdiri dari 7 tabel utama:
+
+### 1. Table: `Users`
+Menyimpan data login pengguna dan role akses.
+*   `UserId` (INT, Primary Key, Identity): ID pengguna (auto-increment).
+*   `Username` (VARCHAR(50), Unique): Username unik untuk login.
+*   `Password` (VARCHAR(50)): Password sederhana berbentuk teks biasa (plain text).
+*   `FullName` (VARCHAR(100)): Nama lengkap pengguna.
+*   `Role` (VARCHAR(30)): Peran pengguna (`PetugasSPPG` atau `SupervisorSPPG` atau `Pemasok`).
+*   `Position` (VARCHAR(50)): Jabatan resmi pengguna.
+
+### 2. Table: `Employees`
+Menyimpan informasi staf/pegawai SPPG.
+*   `EmployeeId` (INT, Primary Key, Identity): ID pegawai (auto-increment).
+*   `EmployeeName` (VARCHAR(100)): Nama lengkap pegawai.
+*   `Position` (VARCHAR(50)): Jabatan pegawai (contoh: Staf Dapur, Koki Utama, Kurir).
+*   `Phone` (VARCHAR(30)): Nomor HP kontak.
+*   `Address` (VARCHAR(200)): Alamat tempat tinggal.
+
+### 3. Table: `RawMaterials`
+Inventori bahan baku masakan di gudang SPPG.
+*   `MaterialId` (INT, Primary Key, Identity): ID bahan baku (auto-increment).
+*   `MaterialName` (VARCHAR(100)): Nama bahan baku (contoh: Beras Cianjur, Telur Ayam).
+*   `Category` (VARCHAR(50)): Kategori klasifikasi makanan (contoh: Karbohidrat, Protein, Sayur).
+*   `Unit` (VARCHAR(20)): Satuan ukur (contoh: kg, liter, butir).
+*   `Stock` (DECIMAL(18,2)): Jumlah stok tersedia.
+*   `EstimatedPrice` (DECIMAL(18,2)): Harga estimasi per satuan.
+
+### 4. Table: `Schools`
+Sekolah penerima paket makan siang gratis catering SPPG.
+*   `SchoolId` (INT, Primary Key, Identity): ID sekolah (auto-increment).
+*   `SchoolName` (VARCHAR(100)): Nama sekolah penerima.
+*   `Address` (VARCHAR(200)): Alamat sekolah lengkap.
+*   `PICName` (VARCHAR(100)): Nama PIC/penanggung jawab di sekolah.
+*   `PICPhone` (VARCHAR(30)): Nomor HP PIC.
+*   `StudentCount` (INT): Jumlah siswa penerima (target porsi makan siang).
+
+### 5. Table: `KitchenNeeds`
+Konsumsi harian bahan baku dapur SPPG berdasarkan menu hari terkait.
+*   `NeedId` (INT, Primary Key, Identity): ID kebutuhan (auto-increment).
+*   `NeedDate` (DATE): Tanggal konsumsi dapur.
+*   `MaterialId` (INT, Foreign Key): Terhubung ke tabel `RawMaterials`.
+*   `Quantity` (DECIMAL(18,2)): Jumlah kebutuhan bahan.
+*   `Unit` (VARCHAR(20)): Satuan ukur kebutuhan.
+*   `Notes` (VARCHAR(200)): Catatan/keterangan tambahan.
+
+### 6. Table: `SupplierOrders`
+Pemesanan bahan baku tambahan dari pemasok luar (Pemasok).
+*   `OrderId` (INT, Primary Key, Identity): ID pesanan (auto-increment).
+*   `OrderDate` (DATE): Tanggal pemesanan.
+*   `SupplierName` (VARCHAR(100)): Nama pemasok.
+*   `MaterialId` (INT, Foreign Key): Terhubung ke tabel `RawMaterials`.
+*   `OrderQuantity` (DECIMAL(18,2)): Jumlah kuantitas pesanan.
+*   `Unit` (VARCHAR(20)): Satuan ukur pesanan.
+*   `Status` (VARCHAR(30)): Status pengiriman (`Pending`, `Diproses`, `Dikirim`, `Selesai`).
+*   `Notes` (VARCHAR(200)): Catatan instruksi pengiriman.
+
+### 7. Table: `ProductionDistribution`
+Memantau realisasi masak porsi masakan dan validasi pengiriman logistik.
+*   `ProcessId` (INT, Primary Key, Identity): ID proses monitoring (auto-increment).
+*   `ProcessDate` (DATE): Tanggal monitoring harian.
+*   `SchoolId` (INT, Foreign Key): Terhubung ke tabel `Schools`.
+*   `PortionCount` (INT): Jumlah porsi makan siang yang direalisasikan.
+*   `ProductionStatus` (VARCHAR(30)): Status masak (`Belum Diproses`, `Diproses`, `Selesai`).
+*   `DistributionStatus` (VARCHAR(30)): Status kirim (`Belum Dikirim`, `Dikirim`, `Selesai`).
+*   `Notes` (VARCHAR(200)): Keterangan validasi atau kendala logistik.
+
+---
+
+## 💾 2. Transact-SQL DDL Script (Table Creation)
+
+Jalankan script SQL Server berikut di **SQL Server Management Studio (SSMS)** untuk membuat database dan mengisi data simulasi awal:
+
+```sql
+-- 1. Create the Database
+CREATE DATABASE SmartMealDistributionDB;
+GO
+
+USE SmartMealDistributionDB;
+GO
+
+-- 2. Create Users Table
+CREATE TABLE Users (
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(50) NOT NULL,
+    FullName VARCHAR(100) NOT NULL,
+    Role VARCHAR(30) NOT NULL CHECK (Role IN ('PetugasSPPG', 'SupervisorSPPG', 'Pemasok')),
+    Position VARCHAR(50) NOT NULL
+);
+
+-- 3. Create Employees Table
+CREATE TABLE Employees (
+    EmployeeId INT IDENTITY(1,1) PRIMARY KEY,
+    EmployeeName VARCHAR(100) NOT NULL,
+    Position VARCHAR(50) NOT NULL,
+    Phone VARCHAR(30) NULL,
+    Address VARCHAR(200) NULL
+);
+
+-- 4. Create RawMaterials Table
+CREATE TABLE RawMaterials (
+    MaterialId INT IDENTITY(1,1) PRIMARY KEY,
+    MaterialName VARCHAR(100) NOT NULL,
+    Category VARCHAR(50) NOT NULL,
+    Unit VARCHAR(20) NOT NULL,
+    Stock DECIMAL(18,2) NOT NULL DEFAULT 0.00,
+    EstimatedPrice DECIMAL(18,2) NOT NULL DEFAULT 0.00
+);
+
+-- 5. Create Schools Table
+CREATE TABLE Schools (
+    SchoolId INT IDENTITY(1,1) PRIMARY KEY,
+    SchoolName VARCHAR(100) NOT NULL,
+    Address VARCHAR(200) NOT NULL,
+    PICName VARCHAR(100) NULL,
+    PICPhone VARCHAR(30) NULL,
+    StudentCount INT NOT NULL DEFAULT 0
+);
+
+-- 6. Create KitchenNeeds Table
+CREATE TABLE KitchenNeeds (
+    NeedId INT IDENTITY(1,1) PRIMARY KEY,
+    NeedDate DATE NOT NULL,
+    MaterialId INT NOT NULL,
+    Quantity DECIMAL(18,2) NOT NULL,
+    Unit VARCHAR(20) NOT NULL,
+    Notes VARCHAR(200) NULL,
+    FOREIGN KEY (MaterialId) REFERENCES RawMaterials(MaterialId) ON DELETE CASCADE
+);
+
+-- 7. Create SupplierOrders Table
+CREATE TABLE SupplierOrders (
+    OrderId INT IDENTITY(1,1) PRIMARY KEY,
+    OrderDate DATE NOT NULL,
+    SupplierName VARCHAR(100) NOT NULL,
+    MaterialId INT NOT NULL,
+    OrderQuantity DECIMAL(18,2) NOT NULL,
+    Unit VARCHAR(20) NOT NULL,
+    Status VARCHAR(30) NOT NULL DEFAULT 'Pending' CHECK (Status IN ('Pending', 'Diproses', 'Dikirim', 'Selesai')),
+    Notes VARCHAR(200) NULL,
+    FOREIGN KEY (MaterialId) REFERENCES RawMaterials(MaterialId) ON DELETE CASCADE
+);
+
+-- 8. Create ProductionDistribution Table
+CREATE TABLE ProductionDistribution (
+    ProcessId INT IDENTITY(1,1) PRIMARY KEY,
+    ProcessDate DATE NOT NULL,
+    SchoolId INT NOT NULL,
+    PortionCount INT NOT NULL,
+    ProductionStatus VARCHAR(30) NOT NULL DEFAULT 'Belum Diproses' CHECK (ProductionStatus IN ('Belum Diproses', 'Diproses', 'Selesai')),
+    DistributionStatus VARCHAR(30) NOT NULL DEFAULT 'Belum Dikirim' CHECK (DistributionStatus IN ('Belum Dikirim', 'Dikirim', 'Selesai')),
+    Notes VARCHAR(200) NULL,
+    FOREIGN KEY (SchoolId) REFERENCES Schools(SchoolId) ON DELETE CASCADE
+);
+GO
+
+-- 9. Seed Mock Data
+-- Seed Users
+INSERT INTO Users (Username, Password, FullName, Role, Position) VALUES
+('petugas', 'password123', 'Andi Saputra', 'PetugasSPPG', 'Staf Dapur'),
+('supervisor', 'password123', 'Budi Santoso', 'SupervisorSPPG', 'Kepala Pelayanan'),
+('pemasok1', 'password123', 'CV Pangan Sejahtera', 'Pemasok', 'Distributor Utama');
+
+-- Seed Employees
+INSERT INTO Employees (EmployeeName, Position, Phone, Address) VALUES
+('Andi Saputra', 'Staf Dapur', '08123456789', 'Jl. Dahlia No. 5, Purwakarta'),
+('Siti Aminah', 'Koki Utama', '08776543210', 'Jl. Mawar No. 12, Purwakarta'),
+('Rahmat Hidayat', 'Kurir Distribusi', '08998877665', 'Jl. Melati No. 8, Purwakarta');
+
+-- Seed RawMaterials
+INSERT INTO RawMaterials (MaterialName, Category, Unit, Stock, EstimatedPrice) VALUES
+('Beras Cianjur', 'Karbohidrat', 'kg', 500.00, 14000.00),
+('Telur Ayam', 'Protein', 'butir', 1000.00, 2000.00),
+('Daging Ayam Fillet', 'Protein', 'kg', 200.00, 35000.00),
+('Minyak Goreng Bimoli', 'Minyak', 'liter', 150.00, 18000.00),
+('Wortel Segar', 'Sayur', 'kg', 100.00, 12000.00);
+
+-- Seed Schools
+INSERT INTO Schools (SchoolName, Address, PICName, PICPhone, StudentCount) VALUES
+('SDN 1 Purwakarta', 'Jl. Veteran No. 12, Purwakarta', 'Pak Joko', '08123456789', 320),
+('SDN 2 Purwakarta', 'Jl. Sudirman No. 45, Purwakarta', 'Ibu Sri', '08776543210', 240),
+('SMPN 1 Purwakarta', 'Jl. Cipaisan No. 2, Purwakarta', 'Pak Heru', '08998877665', 450);
+
+-- Seed KitchenNeeds
+INSERT INTO KitchenNeeds (NeedDate, MaterialId, Quantity, Unit, Notes) VALUES
+(CAST(GETDATE() AS DATE), 1, 50.00, 'kg', 'Menu nasi tim siang'),
+(CAST(GETDATE() AS DATE), 2, 320.00, 'butir', 'Lauk telur dadar SDN 1'),
+(CAST(GETDATE() AS DATE), 5, 15.00, 'kg', 'Wortel untuk sayur sop');
+
+-- Seed SupplierOrders
+INSERT INTO SupplierOrders (OrderDate, SupplierName, MaterialId, OrderQuantity, Unit, Status, Notes) VALUES
+(CAST(GETDATE() AS DATE), 'CV Pangan Sejahtera', 1, 200.00, 'kg', 'Pending', 'Tambahan stok beras cianjur');
+
+-- Seed ProductionDistribution
+INSERT INTO ProductionDistribution (ProcessDate, SchoolId, PortionCount, ProductionStatus, DistributionStatus, Notes) VALUES
+(CAST(GETDATE() AS DATE), 1, 320, 'Selesai', 'Selesai', 'Terkirim lengkap'),
+(CAST(GETDATE() AS DATE), 2, 240, 'Selesai', 'Dikirim', 'Sedang diantarkan kurir Rahmat'),
+(CAST(GETDATE() AS DATE), 3, 450, 'Diproses', 'Belum Dikirim', 'Proses memasak koki Siti');
+GO
+```
+
+---
+
+## 🔑 3. Modul Autentikasi (Users)
 
 ### 🔍 Read (Login Validation)
-Mencocokkan username dan password untuk verifikasi masuk.
 ```sql
 SELECT UserId, Username, FullName, Role, Position 
 FROM Users 
@@ -20,9 +221,7 @@ WHERE Username = @Username AND Password = @Password;
 
 ---
 
-## 👥 2. Modul Data Pegawai (Employees)
-
-Mengelola informasi staf yang bekerja di SPPG (koki, petugas gudang, kurir, dll.).
+## 👥 4. Modul Data Pegawai (Employees)
 
 ### ➕ Create (Insert Employee)
 ```sql
@@ -44,7 +243,6 @@ VALUES (@EmployeeName, @Position, @Phone, @Address);
     WHERE EmployeeName LIKE @SearchQuery OR Position LIKE @SearchQuery
     ORDER BY EmployeeName ASC;
     ```
-    *(Keterangan: `@SearchQuery` dilewatkan dengan format `'%keyword%'`)*
 
 ### ✏️ Update (Ubah Data Pegawai)
 ```sql
@@ -64,9 +262,7 @@ WHERE EmployeeId = @EmployeeId;
 
 ---
 
-## 📦 3. Modul Data Bahan Baku (RawMaterials)
-
-Mengelola inventori bahan baku makanan di gudang SPPG.
+## 📦 5. Modul Data Bahan Baku (RawMaterials)
 
 ### ➕ Create (Insert Raw Material)
 ```sql
@@ -108,9 +304,7 @@ WHERE MaterialId = @MaterialId;
 
 ---
 
-## 🏫 4. Modul Sekolah Penerima (Schools)
-
-Mengelola sekolah penerima paket makan siang gratis SPPG.
+## 🏫 6. Modul Sekolah Penerima (Schools)
 
 ### ➕ Create (Insert School)
 ```sql
@@ -151,9 +345,7 @@ WHERE SchoolId = @SchoolId;
 
 ---
 
-## 🍳 5. Modul Kebutuhan Dapur Harian (KitchenNeeds)
-
-Mencatat kebutuhan harian bahan baku dapur SPPG berdasarkan menu hari tersebut.
+## 🍳 7. Modul Kebutuhan Dapur Harian (KitchenNeeds)
 
 ### ➕ Create (Insert Kitchen Need)
 ```sql
@@ -162,7 +354,6 @@ VALUES (@NeedDate, @MaterialId, @Quantity, @Unit, @Notes);
 ```
 
 ### 🔍 Read (Relational Select with INNER JOIN)
-Menampilkan data kebutuhan dapur lengkap dengan nama bahan baku yang terelasi.
 ```sql
 SELECT 
     k.NeedId,
@@ -197,9 +388,7 @@ WHERE NeedId = @NeedId;
 
 ---
 
-## 🚚 6. Modul Pesanan ke Pemasok (SupplierOrders)
-
-Mengelola pemesanan bahan baku tambahan dari pemasok luar.
+## 🚚 8. Modul Pesanan ke Pemasok (SupplierOrders)
 
 ### ➕ Create (Insert Supplier Order)
 ```sql
@@ -236,13 +425,13 @@ ORDER BY o.OrderDate DESC, o.OrderId DESC;
         Notes = @Notes
     WHERE OrderId = @OrderId;
     ```
-*   **Ubah Status Pengiriman saja:**
+*   **Ubah Status Pengiriman:**
     ```sql
     UPDATE SupplierOrders 
-    SET Status = @Status -- Pilihan status: 'Pending', 'Diproses', 'Dikirim', 'Selesai'
+    SET Status = @Status -- Status: 'Pending', 'Diproses', 'Dikirim', 'Selesai'
     WHERE OrderId = @OrderId;
     ```
-*   **Menambah Stok Bahan Baku (Dijalankan otomatis saat Status Pesanan diset 'Selesai'):**
+*   **Update Stok Bahan Baku (Dijalankan otomatis saat Status Pesanan di-set 'Selesai'):**
     ```sql
     UPDATE RawMaterials 
     SET Stock = Stock + @OrderQuantity 
@@ -257,11 +446,9 @@ WHERE OrderId = @OrderId;
 
 ---
 
-## 🍳 7. Monitoring Produksi & Distribusi (ProductionDistribution)
+## 🍳 9. Monitoring Produksi & Distribusi (ProductionDistribution)
 
-Memantau porsi makan siang sekolah yang dimasak (produksi) dan diantarkan (distribusi).
-
-### ➕ Create (Insert Production Record)
+### ➕ Create (Insert Record)
 ```sql
 INSERT INTO ProductionDistribution (ProcessDate, SchoolId, PortionCount, ProductionStatus, DistributionStatus, Notes)
 VALUES (@ProcessDate, @SchoolId, @PortionCount, 'Belum Diproses', 'Belum Dikirim', @Notes);
@@ -294,7 +481,7 @@ ORDER BY p.ProcessDate DESC, s.SchoolName ASC;
         Notes = @Notes
     WHERE ProcessId = @ProcessId;
     ```
-*   **Validasi Status Produksi & Distribusi (Oleh SupervisorSPPG):**
+*   **Validasi Status (Oleh SupervisorSPPG):**
     ```sql
     UPDATE ProductionDistribution 
     SET ProductionStatus = @ProductionStatus,      -- 'Belum Diproses', 'Diproses', 'Selesai'
@@ -311,12 +498,9 @@ WHERE ProcessId = @ProcessId;
 
 ---
 
-## 📊 8. Query Laporan (Hari ke-1)
-
-Query analitik untuk menyusun 4 jenis Laporan utama:
+## 📊 10. Query Laporan (Hari ke-1)
 
 ### 📑 Laporan 1: Laporan Stok Bahan Baku & Estimasi Biaya
-Menampilkan informasi sisa stok bahan baku dan estimasi nilai total inventori (Sisa Stok × Harga Perkiraan).
 ```sql
 SELECT 
     MaterialId,
@@ -332,7 +516,6 @@ ORDER BY Category ASC, MaterialName ASC;
 ```
 
 ### 📑 Laporan 2: Laporan Penggunaan Bahan Baku Dapur Harian
-Menghitung akumulasi total bahan baku yang digunakan pada rentang waktu tertentu beserta kalkulasi pengeluaran biaya denda/kebutuhan.
 ```sql
 SELECT 
     k.NeedDate AS TanggalKebutuhan,
@@ -349,7 +532,6 @@ ORDER BY k.NeedDate DESC, NamaBahanBaku ASC;
 ```
 
 ### 📑 Laporan 3: Rekapitulasi Pesanan Bahan Baku Ke Pemasok
-Menyajikan statistik total pesanan per pemasok yang dikelompokkan berdasarkan status pengiriman untuk menilai performa distributor.
 ```sql
 SELECT 
     SupplierName AS NamaPemasok,
@@ -362,7 +544,6 @@ ORDER BY SupplierName ASC, Status ASC;
 ```
 
 ### 📑 Laporan 4: Laporan Distribusi Makan Siang Sekolah
-Menampilkan rekapitulasi realisasi pengiriman porsi makan siang ke sekolah serta selisih porsi jika ada ketidakcocokan jumlah siswa.
 ```sql
 SELECT 
     p.ProcessDate AS TanggalPengiriman,
